@@ -1,0 +1,89 @@
+<app-page-header
+  eyebrow="SPRING 2026 · WEEK 8"
+  title="Good morning, Nour"
+  subtitle="Here’s what’s happening with your academic journey today."
+>
+  <button class="primary-button" type="button" routerLink="/student/courses">
+    <svg lucideBookOpen [size]="17"></svg> Register courses
+  </button>
+</app-page-header>
+
+<div class="stats-grid">
+  <app-stat-card label="Cumulative GPA" value="3.82" note="Top 8% of your cohort" tone="gold">
+    <svg icon lucideTrendingUp></svg>
+  </app-stat-card>
+  <app-stat-card label="Credit hours" value="16 / 18" note="5 courses this semester">
+    <svg icon lucideBookOpen></svg>
+  </app-stat-card>
+  <app-stat-card label="Attendance" value="94%" note="Above required threshold">
+    <svg icon lucideCheckCircle2></svg>
+  </app-stat-card>
+  <app-stat-card label="Next class" value="10:30" note="Database Systems · Lab 3">
+    <svg icon lucideClock3></svg>
+  </app-stat-card>
+</div>
+
+<div class="dashboard-grid">
+  <app-panel title="Academic performance" subtitle="Cumulative GPA across semesters" [hasActions]="true">
+    <span actions class="metric-up">+0.21 this year</span>
+    <div class="chart-wrap">
+      <svg viewBox="0 0 360 180" width="100%" height="100%" preserveAspectRatio="none">
+        <polyline
+          [attr.points]="gpaPoints"
+          fill="none"
+          stroke="#b58b25"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        @for (p of gpaTrend; track p.term; let i = $index) {
+          <circle
+            [attr.cx]="40 + i * 70"
+            [attr.cy]="160 - ((p.value - 2.8) / 1.2) * 120"
+            r="4"
+            fill="#fff"
+            stroke="#b58b25"
+            stroke-width="3"
+          />
+          <text [attr.x]="40 + i * 70" y="175" text-anchor="middle" fill="#8a93a3" font-size="10">{{ p.term }}</text>
+        }
+      </svg>
+    </div>
+  </app-panel>
+  <app-panel title="Upcoming" subtitle="Your next academic events">
+    <div class="timeline">
+      <div>
+        <time><b>18</b><span>MAR</span></time><i></i>
+        <section><span>09:00 AM · EXAM</span><strong>Computer Networks</strong><small>Hall A · Seat 046</small></section>
+      </div>
+      <div>
+        <time><b>20</b><span>MAR</span></time><i></i>
+        <section><span>11:59 PM · DEADLINE</span><strong>AI Search Assignment</strong><small>Submit via course workspace</small></section>
+      </div>
+      <div>
+        <time><b>23</b><span>MAR</span></time><i></i>
+        <section><span>10:30 AM · QUIZ</span><strong>Database Systems</strong><small>Lab 3</small></section>
+      </div>
+    </div>
+  </app-panel>
+</div>
+
+<app-panel title="Current courses" subtitle="Spring semester 2026" [hasActions]="true">
+  <button actions class="text-button" type="button" routerLink="/student/courses">View all courses →</button>
+  <div class="course-list">
+    @for (c of courses(); track c.code; let i = $index) {
+      <div class="course-row">
+        <span class="course-code" [class.c1]="i === 1" [class.c2]="i === 2" [class.c3]="i === 3" [class.c4]="i === 4">{{ c.code }}</span>
+        <div class="course-main">
+          <strong>{{ c.name }}</strong>
+          <small>{{ c.instructor }} · {{ c.room }}</small>
+        </div>
+        <div class="course-progress">
+          <span>{{ c.progress }}% complete</span>
+          <app-progress [value]="c.progress" />
+        </div>
+        <app-status>{{ c.credits }} credits</app-status>
+      </div>
+    }
+  </div>
+</app-panel>

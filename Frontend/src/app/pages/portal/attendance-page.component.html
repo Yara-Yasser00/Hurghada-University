@@ -1,0 +1,57 @@
+<app-page-header
+  eyebrow="SPRING 2026"
+  [title]="instructor() ? 'Record attendance' : 'Attendance overview'"
+  [subtitle]="instructor() ? 'CS 341 · Monday, March 16 · 10:30 AM' : 'Track attendance status across your enrolled courses.'"
+>
+  @if (instructor()) {
+    <button class="primary-button" type="button" (click)="submitAttendance()">
+      <svg lucideCheck [size]="17"></svg> Submit attendance
+    </button>
+  }
+</app-page-header>
+
+@if (instructor()) {
+  <div class="filterbar">
+    <label class="date-field">
+      <span>Session date</span>
+      <input type="date" [ngModel]="sessionDate()" (ngModelChange)="sessionDate.set($event)" />
+    </label>
+  </div>
+  <app-panel title="Student checklist" [subtitle]="present().length + ' of ' + students().length + ' marked present'">
+    <div class="attendance-list">
+      @for (s of students(); track s.id) {
+        <label>
+          <input type="checkbox" [checked]="isPresent(s.id)" (change)="togglePresent(s.id)" />
+          <span class="person-avatar">{{ initials(s.name) }}</span>
+          <section>
+            <strong>{{ s.name }}</strong>
+            <small>{{ s.id }}</small>
+          </section>
+          <app-status [kind]="isPresent(s.id) ? 'success' : 'danger'">
+            {{ isPresent(s.id) ? 'Present' : 'Absent' }}
+          </app-status>
+        </label>
+      }
+    </div>
+  </app-panel>
+} @else {
+  <div class="attendance-cards">
+    @for (c of courses(); track c.code; let i = $index) {
+      <article>
+        <div>
+          <span class="course-code" [class.c1]="i === 1" [class.c2]="i === 2" [class.c3]="i === 3" [class.c4]="i === 4">{{ c.code }}</span>
+          <app-status [kind]="attendanceValues[i] < 80 ? 'danger' : 'success'">
+            {{ attendanceValues[i] < 80 ? 'Warning' : 'Good standing' }}
+          </app-status>
+        </div>
+        <h3>{{ c.name }}</h3>
+        <div class="attendance-value">
+          <b>{{ attendanceValues[i] }}%</b>
+          <span>{{ (attendanceValues[i] / 5) | number:'1.0-0' }} of 20 sessions</span>
+        </div>
+        <app-progress [value]="attendanceValues[i]" [warning]="attendanceValues[i] < 80" />
+        <small>Minimum required attendance: 75%</small>
+      </article>
+    }
+  </div>
+}

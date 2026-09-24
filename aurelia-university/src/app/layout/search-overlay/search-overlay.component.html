@@ -1,0 +1,57 @@
+@if (open()) {
+  <div
+    class="search-overlay"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'common.searchAria' | translate"
+    (click)="onBackdrop($event)"
+  >
+    <div class="search-overlay__panel" (click)="$event.stopPropagation()">
+      <div class="search-overlay__top">
+        <h2 class="search-overlay__title">{{ 'common.searchTitle' | translate }}</h2>
+        <button type="button" class="search-overlay__close" (click)="close()" [attr.aria-label]="'common.closeSearch' | translate">
+          ×
+        </button>
+      </div>
+
+      <form class="search-overlay__form" (submit)="onSubmit($event)">
+        <label class="sr-only" for="cu-search">{{ 'common.searchPlaceholder' | translate }}</label>
+        <input
+          #searchInput
+          id="cu-search"
+          type="search"
+          [ngModel]="query()"
+          (ngModelChange)="query.set($event)"
+          name="q"
+          [placeholder]="'common.searchHint' | translate"
+          [attr.aria-label]="'common.searchPlaceholder' | translate"
+        />
+        <button class="au-btn au-btn-primary" type="submit">{{ 'common.searchTitle' | translate }}</button>
+      </form>
+
+      <div class="search-overlay__suggestions">
+        <p>{{ 'common.searchSuggested' | translate }}</p>
+        <div class="search-overlay__chips">
+          @for (s of suggested; track s) {
+            <button type="button" (click)="applySuggestion(s)">{{ s }}</button>
+          }
+        </div>
+      </div>
+
+      @if (query().trim()) {
+        <div class="search-overlay__results" aria-live="polite">
+          <h3>{{ results().length }} {{ 'common.searchResults' | translate }}</h3>
+          @for (r of results(); track r.id) {
+            <a [routerLink]="r.path" (click)="close()">
+              <span>{{ r.type }}</span>
+              <strong>{{ r.title }}</strong>
+              <p>{{ r.blurb }}</p>
+            </a>
+          } @empty {
+            <p class="search-overlay__empty">{{ 'common.searchEmpty' | translate }}</p>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}

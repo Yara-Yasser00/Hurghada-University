@@ -1,0 +1,159 @@
+<app-page-header
+  eyebrow="UNIVERSITY DIRECTORY"
+  [title]="title()"
+  subtitle="Search, review and manage university records."
+>
+  <button class="primary-button" type="button" (click)="openCreate()">
+    <svg lucideUserPlus [size]="17"></svg> {{ addLabel() }}
+  </button>
+</app-page-header>
+
+<div class="filterbar">
+  <div class="table-search">
+    <svg lucideSearch [size]="17"></svg>
+    <input
+      [ngModel]="query()"
+      (ngModelChange)="query.set($event)"
+      [placeholder]="'Search ' + type() + '...'"
+    />
+  </div>
+  <button type="button"><svg lucideFilter [size]="16"></svg> Filter</button>
+  <button type="button" (click)="exportCsv()"><svg lucideDownload [size]="16"></svg> Export</button>
+</div>
+
+<app-panel [title]="'All ' + type()" [subtitle]="filtered().length + ' records shown'">
+  @if (filtered().length === 0) {
+    <div class="empty-state">
+      <strong>No records found</strong>
+      <p>Try another search term or add a new {{ type().slice(0, -1) }}.</p>
+      <button class="primary-button" type="button" (click)="openCreate()">{{ addLabel() }}</button>
+    </div>
+  } @else {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>{{ type() === 'staff' ? 'Role' : 'Affiliation' }}</th>
+            <th>{{ type() === 'students' ? 'Level' : 'Details' }}</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (x of filtered(); track trackKey(x); let i = $index) {
+            <tr>
+              <td>
+                <div class="table-person">
+                  <span
+                    class="person-avatar"
+                    [class.p1]="i === 1"
+                    [class.p2]="i === 2"
+                    [class.p3]="i === 3"
+                  >{{ initials(x.name) }}</span>
+                  <span>
+                    <strong>{{ x.name }}</strong>
+                    <small>{{ rowMeta(x, i) }}</small>
+                  </span>
+                </div>
+              </td>
+              <td>{{ affiliation(x) }}</td>
+              <td>{{ details(x) }}</td>
+              <td>
+                <app-status [kind]="statusOf(x) === 'Review' || statusOf(x) === 'Inactive' ? 'warning' : 'success'">
+                  {{ statusOf(x) }}
+                </app-status>
+              </td>
+              <td class="row-actions">
+                <button class="text-button" type="button" (click)="openView(x)">View →</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</app-panel>
+
+<app-drawer
+  [open]="drawerOpen()"
+  [eyebrow]="type().toUpperCase()"
+  [title]="selected()?.name || ''"
+  [subtitle]="selected()?.id || selected()?.email || selected()?.arabic || ''"
+  (closed)="drawerOpen.set(false)"
+>
+  @if (selected(); as row) {
+    <dl class="detail-grid">
+      <div><dt>Affiliation</dt><dd>{{ affiliation(row) }}</dd></div>
+      <div><dt>Details</dt><dd>{{ details(row) }}</dd></div>
+      <div><dt>Status</dt><dd>{{ statusOf(row) }}</dd></div>
+      @if (row.gpa) {
+        <div><dt>GPA</dt><dd>{{ row.gpa }}</dd></div>
+      }
+      @if (row.contract) {
+        <div><dt>Contract</dt><dd>{{ row.contract }}</dd></div>
+      }
+      @if (row.since) {
+        <div><dt>Since</dt><dd>{{ row.since }}</dd></div>
+      }
+      @if (row.dean) {
+        <div><dt>Dean</dt><dd>{{ row.dean }}</dd></div>
+      }
+      @if (row.head) {
+        <div><dt>Head</dt><dd>{{ row.head }}</dd></div>
+      }
+      @if (row.email) {
+        <div><dt>Email</dt><dd>{{ row.email }}</dd></div>
+      }
+    </dl>
+  }
+  <div actions class="drawer-actions">
+    <button class="secondary-button" type="button" (click)="openEdit(selected())">
+      <svg lucidePencil [size]="16"></svg> Edit
+    </button>
+    @if (type() === 'faculties' || type() === 'admins') {
+      <button class="secondary-button" type="button" (click)="toggleEnabled(selected())">
+        <svg lucideToggleLeft [size]="16"></svg> Toggle status
+      </button>
+    }
+    <button class="secondary-button danger-button" type="button" (click)="deleteRow(selected())">
+      Delete
+    </button>
+  </div>
+</app-drawer>
+
+<app-modal
+  [open]="modalOpen()"
+  [title]="addLabel()"
+  subtitle="Fill in the required fields to create or update a record."
+  (closed)="modalOpen.set(false)"
+>
+  <div class="form-grid">
+    @for (key of (form() | keyvalue); track key.key) {
+      @if (key.key !== 'enabled' && key.key !== 'imageUrl' && key.key !== 'apiId') {
+        <label [class.full]="key.key === 'description'">
+          <span>{{ key.key }}</span>
+          @if (key.key === 'description') {
+            <textarea rows="3" [ngModel]="form()[key.key]" (ngModelChange)="setField(key.key, $event)"></textarea>
+          } @else {
+            <input [ngModel]="form()[key.key]" (ngModelChange)="setField(key.key, $event)" />
+          }
+        </label>
+      }
+    }
+    @if (type() === 'faculties') {
+      <div class="full">
+        <span style="display:block;margin-bottom:0.4rem;font-weight:600">Faculty image</span>
+        <app-image-upload
+          label="Faculty cover image"
+          [value]="form()['imageUrl'] || ''"
+          (valueChange)="setField('imageUrl', $event)"
+        />
+      </div>
+    }
+  </div>
+  <div actions class="drawer-actions">
+    <button class="secondary-button" type="button" (click)="modalOpen.set(false)">Cancel</button>
+    <button class="primary-button" type="button" (click)="saveForm()">Save record</button>
+  </div>
+</app-modal>

@@ -1,0 +1,69 @@
+<app-page-header
+  eyebrow="UNIVERSITY OPERATIONS"
+  title="Institution overview"
+  subtitle="Live academic and operational indicators across Hurghada University."
+>
+  <button class="primary-button" type="button" routerLink="/admin/students">
+    <svg lucideUserPlus [size]="17"></svg> Add student
+  </button>
+</app-page-header>
+
+<div class="stats-grid">
+  <app-stat-card [label]="'Total students'" [value]="'' + stats().totalStudents" note="From live university database" tone="gold">
+    <svg icon lucideGraduationCap></svg>
+  </app-stat-card>
+  <app-stat-card [label]="'Faculty members'" [value]="'' + stats().totalStaff" note="Staff directory">
+    <svg icon lucideUsersRound></svg>
+  </app-stat-card>
+  <app-stat-card [label]="'Active courses'" [value]="'' + stats().activeCourses" note="Enabled catalogue">
+    <svg icon lucideBookOpen></svg>
+  </app-stat-card>
+  <app-stat-card
+    [label]="'Enrollment rate'"
+    [value]="(stats().enrollmentRate | number:'1.0-1') + '%'"
+    note="Across faculties"
+  >
+    <svg icon lucideBarChart3></svg>
+  </app-stat-card>
+</div>
+
+<div class="dashboard-grid wide-left">
+  <app-panel title="Grade distribution" subtitle="University-wide · Fall 2025">
+    <div class="chart-wrap tall bar-chart">
+      @for (d of distribution; track d.grade; let i = $index) {
+        <div class="bar-col">
+          <div class="bar" [style.height.%]="(d.value / maxDist) * 100" [class.gold]="i === 0"></div>
+          <span>{{ d.grade }}</span>
+        </div>
+      }
+    </div>
+  </app-panel>
+  <app-panel title="Registration pulse" subtitle="Spring 2026">
+    <div class="ring-wrap">
+      <div class="ring"><span><b>{{ stats().enrollmentRate | number:'1.0-0' }}%</b><small>Complete</small></span></div>
+      <div class="ring-legend">
+        <div><i class="gold-dot"></i><span>Faculties</span><b>{{ stats().faculties }}</b></div>
+        <div><i></i><span>Students</span><b>{{ stats().totalStudents }}</b></div>
+      </div>
+    </div>
+  </app-panel>
+</div>
+
+<app-panel title="Faculties at a glance" subtitle="Enrollment and academic structure" [hasActions]="true">
+  <button actions class="text-button" type="button" routerLink="/admin/faculties">Manage faculties →</button>
+  <div class="faculty-grid">
+    @for (f of faculties(); track f.name; let i = $index) {
+      <div>
+        <span class="faculty-icon" [class.c1]="i === 1" [class.c2]="i === 2" [class.c3]="i === 3"><svg lucideGraduationCap [size]="17"></svg></span>
+        <section>
+          <strong>{{ f.name }}</strong>
+          <small>{{ f.arabic }}</small>
+        </section>
+        <div>
+          <b>{{ f.students }}</b>
+          <small>students</small>
+        </div>
+      </div>
+    }
+  </div>
+</app-panel>

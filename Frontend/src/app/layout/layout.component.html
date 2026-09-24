@@ -1,0 +1,142 @@
+<div class="app-shell">
+  @if (mobileOpen()) {
+    <button class="mobile-scrim" aria-label="Close navigation" type="button" (click)="toggleMobile(false)"></button>
+  }
+
+  <aside class="sidebar" [class.is-collapsed]="collapsed()" [class.is-open]="mobileOpen()">
+    <div class="brand">
+      <a class="brand-link" [href]="publicSiteUrl" [attr.aria-label]="'brand.name' | translate">
+        <img class="brand-logo" src="assets/brand/hu-logo.png" [alt]="'brand.name' | translate" width="42" height="42" />
+        <div class="brand-copy">
+          <strong>{{ 'brand.name' | translate }}</strong>
+          <span>{{ 'brand.sub' | translate }}</span>
+        </div>
+      </a>
+      <button class="mobile-close" type="button" (click)="toggleMobile(false)">
+        <svg lucideX [size]="19"></svg>
+      </button>
+    </div>
+
+    <div class="portal-label"><span>{{ portalLabel() }}</span></div>
+
+    <nav>
+      @for (item of portal().nav; track item[0]) {
+        <a
+          [routerLink]="navTo(item[0])"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item[0] === 'overview' }"
+          (click)="toggleMobile(false)"
+        >
+          @switch (item[0]) {
+            @case ('overview') { <svg lucideGrid2x2 [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('courses') { <svg lucideBookOpen [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('schedule') { <svg lucideCalendarDays [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('grades') { <svg lucideFileCheck2 [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('absences') { <svg lucideClipboardCheck [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('faculties') { <svg lucideBuilding2 [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('departments') { <svg lucideShieldCheck [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('students') { <svg lucideGraduationCap [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('exams') { <svg lucideCalendarDays [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('registration') { <svg lucideClipboardCheck [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('cms') { <svg lucideGlobe [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('staff') { <svg lucideUsersRound [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('payroll') { <svg lucideWalletCards [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('admins') { <svg lucideUserRound [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('fees') { <svg lucideWallet [size]="19" [strokeWidth]="1.8"></svg> }
+            @case ('announcements') { <svg lucideMegaphone [size]="19" [strokeWidth]="1.8"></svg> }
+            @default { <svg lucideGrid2x2 [size]="19" [strokeWidth]="1.8"></svg> }
+          }
+          <span>{{ item[1] | translate }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a [href]="publicSiteUrl">
+        <svg lucideHome [size]="19"></svg>
+        <span>{{ 'nav.universityHome' | translate }}</span>
+      </a>
+      <a [routerLink]="'/' + role() + '/settings'">
+        <svg lucideSettings [size]="19"></svg>
+        <span>{{ 'nav.settings' | translate }}</span>
+      </a>
+      <button type="button" (click)="signOut()">
+        <svg lucideLogOut [size]="19"></svg>
+        <span>{{ 'nav.signOut' | translate }}</span>
+      </button>
+    </div>
+
+    <button class="collapse-button" type="button" (click)="toggleCollapsed()">
+      <svg lucideChevronLeft [size]="16"></svg>
+    </button>
+  </aside>
+
+  <div class="content-frame">
+    <header class="topbar">
+      <div class="topbar-title">
+        <button class="mobile-menu" type="button" (click)="toggleMobile(true)">
+          <svg lucideMenu [size]="22"></svg>
+        </button>
+        <div>
+          <span>{{ portalLabel() }}</span>
+          <h1>{{ currentLabel() }}</h1>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="top-search">
+          <svg lucideSearch [size]="17"></svg>
+          <input
+            [attr.aria-label]="'common.search' | translate"
+            [placeholder]="'common.searchPlaceholder' | translate"
+          />
+        </div>
+        <button class="lang-button" type="button" (click)="i18n.toggle()" [attr.aria-label]="'common.language' | translate">
+          {{ i18n.lang() === 'EN' ? 'عربي' : 'EN' }}
+        </button>
+        <div class="notif-wrap">
+          <button
+            class="icon-button notification"
+            type="button"
+            [attr.aria-label]="'common.notifications' | translate"
+            (click)="toggleNotif()"
+          >
+            <svg lucideBell [size]="19"></svg>
+            @if (notifications.unreadCount() > 0) {
+              <i></i>
+            }
+          </button>
+          @if (notifOpen()) {
+            <div class="notif-dropdown">
+              <header>
+                <strong>{{ 'common.notifications' | translate }}</strong>
+                <button type="button" class="text-button" (click)="notifications.markAllRead()">
+                  {{ 'common.markAllRead' | translate }}
+                </button>
+              </header>
+              @for (n of notifications.items().slice(0, 4); track n.id) {
+                <button type="button" class="notif-item" [class.unread]="!n.read" (click)="openNotification(n.id, n.href)">
+                  <strong>{{ n.title }}</strong>
+                  <span>{{ n.body }}</span>
+                  <small>{{ n.time }}</small>
+                </button>
+              }
+              <a class="notif-all" [routerLink]="'/' + role() + '/notifications'" (click)="notifOpen.set(false)">
+                {{ 'common.viewAll' | translate }}
+              </a>
+            </div>
+          }
+        </div>
+        <a class="user-chip" [routerLink]="'/' + role() + '/profile'">
+          <div class="avatar">{{ initials() }}</div>
+          <div>
+            <strong>{{ displayName() }}</strong>
+            <span>{{ portalLabel() }}</span>
+          </div>
+        </a>
+      </div>
+    </header>
+    <main id="portal-main" tabindex="-1" [class.page-enter]="contentEntering()">
+      <router-outlet />
+    </main>
+  </div>
+</div>

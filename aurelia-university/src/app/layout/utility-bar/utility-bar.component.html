@@ -1,0 +1,36 @@
+<div class="utility-bar" role="navigation" [attr.aria-label]="'common.utilityNav' | translate">
+  <div class="utility-bar__inner au-container">
+    <ul class="utility-bar__links">
+      @for (link of links; track link.path + link.labelKey) {
+        <li>
+          @if (isExternal(link.path)) {
+            <a [href]="link.path" target="_blank" rel="noopener noreferrer">{{ link.labelKey | translate }}</a>
+          } @else {
+            <a [routerLink]="link.path">{{ link.labelKey | translate }}</a>
+          }
+        </li>
+      }
+    </ul>
+
+    <div class="utility-bar__actions">
+      <button
+        type="button"
+        class="utility-bar__lang"
+        (click)="locale.toggle()"
+        [attr.aria-label]="'nav.language' | translate"
+      >
+        <span [class.is-active]="locale.lang() === 'ar'">عربي</span>
+        <span class="utility-bar__lang-sep" aria-hidden="true">|</span>
+        <span [class.is-active]="locale.lang() === 'en'">EN</span>
+      </button>
+
+      <button type="button" class="utility-bar__search" (click)="onSearch()" [attr.aria-label]="'nav.search' | translate">
+        <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M20 20l-3.5-3.5" stroke-linecap="round" />
+        </svg>
+        {{ 'nav.search' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

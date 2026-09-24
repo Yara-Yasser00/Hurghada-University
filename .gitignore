@@ -1,0 +1,42 @@
+# Build
+**/bin/
+**/obj/
+**/dist/
+**/.angular/
+**/node_modules/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
+
+# Secrets / local overrides
+.env
+.env.*
+!.env.example
+**/appsettings.Development.json
+**/appsettings.*.local.json
+**/secrets.json
+**/ftp-credentials*
+**/deploy-secrets*
+
+# Published hosting output
+**/wwwroot/
+**/publish/
+**/.vercel/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vs/
+.idea/
+.cursor/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploaded media (served by API)
+**/uploads/
+!**/uploads/.gitkeep

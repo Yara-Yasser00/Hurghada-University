@@ -1,0 +1,83 @@
+<section class="hero" [attr.aria-label]="'home.hero.aria' | translate">
+  <div class="hero__media" aria-hidden="true">
+    @for (slide of slides; track slide.id; let i = $index) {
+      <img
+        class="hero__slide-img"
+        [class.is-active]="index() === i"
+        [src]="slide.image"
+        alt=""
+        width="1920"
+        height="1080"
+        [attr.fetchpriority]="i === 0 ? 'high' : null"
+        [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+        decoding="async"
+      />
+    }
+    <div class="hero__wash"></div>
+    <div class="hero__grain"></div>
+  </div>
+
+  <div class="hero__content">
+    <div class="au-container hero__inner">
+      <p class="hero__brand">{{ brand() }}</p>
+
+      @for (tick of [index()]; track tick) {
+        <div class="hero__copy">
+          <h1>{{ active().titleKey | translate }}</h1>
+          <p class="hero__lede">{{ active().bodyKey | translate }}</p>
+        </div>
+      }
+
+      <div class="hero__cta">
+        <a class="hero__btn hero__btn--primary" routerLink="/faculties">
+          {{ 'home.hero.faculties' | translate }}
+        </a>
+        <a class="hero__btn hero__btn--ghost" routerLink="/about">
+          {{ 'home.hero.about' | translate }}
+        </a>
+      </div>
+
+      <div
+        class="hero__controls"
+        role="group"
+        [attr.aria-label]="'home.hero.slidesNav' | translate"
+        (mouseenter)="pauseControls()"
+        (mouseleave)="resumeControls()"
+        (focusin)="pauseControls()"
+        (focusout)="resumeControls($event)"
+      >
+        <button type="button" class="hero__nav" (click)="prev()" [attr.aria-label]="'home.hero.prev' | translate">
+          ‹
+        </button>
+
+        <div class="hero__dots">
+          @for (slide of slides; track slide.id; let i = $index) {
+            <button
+              type="button"
+              class="hero__dot"
+              [class.is-active]="index() === i"
+              [attr.aria-label]="('home.hero.slideOf' | translate) + ' ' + (i + 1)"
+              [attr.aria-current]="index() === i ? 'true' : null"
+              (click)="goTo(i)"
+            ></button>
+          }
+        </div>
+
+        <button type="button" class="hero__nav" (click)="next()" [attr.aria-label]="'home.hero.next' | translate">
+          ›
+        </button>
+      </div>
+
+      @if (!reducedMotion()) {
+        @for (tick of [index()]; track tick) {
+          <div class="hero__progress" aria-hidden="true">
+            <span
+              [class.is-paused]="paused()"
+              [style.--slide-ms]="slideMs + 'ms'"
+            ></span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</section>

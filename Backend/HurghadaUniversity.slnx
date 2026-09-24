@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HurghadaUniversity.API/HurghadaUniversity.API.csproj" />
+    <Project Path="src/HurghadaUniversity.Application/HurghadaUniversity.Application.csproj" />
+    <Project Path="src/HurghadaUniversity.Domain/HurghadaUniversity.Domain.csproj" />
+    <Project Path="src/HurghadaUniversity.Infrastructure/HurghadaUniversity.Infrastructure.csproj" />
+  </Folder>
+</Solution>

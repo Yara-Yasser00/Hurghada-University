@@ -1,0 +1,434 @@
+.home-audience {
+  background: var(--surface);
+  padding: 0 0 clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.home-audience__inner {
+  padding-top: 1.75rem;
+}
+
+.home-actions {
+  padding: 1.5rem 0 0;
+  background: var(--surface);
+}
+
+.actions-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0.65rem;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 3.4rem;
+  padding: 0.85rem 1rem;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: filter var(--transition), transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+}
+
+.action::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
+  transform: translateX(120%);
+  transition: transform 0.55s var(--ease-out);
+}
+
+.action:hover {
+  filter: brightness(1.06);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.action:hover::after {
+  transform: translateX(-120%);
+}
+
+.action--primary {
+  background: var(--primary-deep);
+}
+
+.action--teal {
+  background: var(--teal);
+}
+
+.action--green,
+.action--wide {
+  background: var(--green);
+  grid-column: 1 / -1;
+}
+
+.action--orange {
+  background: var(--orange);
+}
+
+.action--lime {
+  background: var(--lime);
+}
+
+.actions-grid .action--primary:nth-child(4),
+.actions-grid .action--orange,
+.actions-grid .action--teal:nth-child(6),
+.actions-grid .action--lime {
+  grid-column: auto;
+}
+
+.actions-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.actions-grid .action:nth-child(1) {
+  grid-column: span 2;
+}
+
+.actions-grid .action:nth-child(2) {
+  grid-column: span 2;
+}
+
+.actions-grid .action:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 800px) {
+  .actions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions-grid .action:nth-child(1),
+  .actions-grid .action:nth-child(2),
+  .actions-grid .action:nth-child(3) {
+    grid-column: auto;
+  }
+}
+
+.section-title {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 3.5vw, 2.55rem);
+  color: var(--primary-deep);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.lede {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 36rem;
+  line-height: 1.55;
+}
+
+.study-intro,
+.section-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.study-intro .lede {
+  margin-top: 0.75rem;
+}
+
+.study-intro h2,
+.admissions-panel h2 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 3.5vw, 2.55rem);
+  color: var(--primary-deep);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.home-study {
+  background: var(--secondary);
+}
+
+.study-featured {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.study-featured__media {
+  display: block;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.study-featured__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.study-featured__media:hover img {
+  transform: scale(1.04);
+}
+
+.study-featured__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  gap: 0.65rem;
+}
+
+.study-featured__copy .cat {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.study-featured__copy h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+  color: var(--primary-deep);
+  line-height: 1.2;
+}
+
+.study-featured__copy p {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+}
+
+.study-grid,
+.college-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+  .study-grid,
+  .college-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.home-research {
+  background: var(--primary-deep);
+  color: #fff;
+}
+
+.home-admissions {
+  background: var(--surface);
+}
+
+.admissions-panel {
+  display: grid;
+  grid-template-columns: 1.45fr 0.9fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  background: var(--secondary);
+}
+
+.admissions-panel__main {
+  padding: clamp(2rem, 4.5vw, 3rem);
+}
+
+.admissions-panel__main p:not(.au-eyebrow) {
+  margin: 0.85rem 0 1.5rem;
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.admissions-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.admissions-panel__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-inline-start: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.admissions-panel__links li {
+  flex: 1;
+  border-bottom: 1px solid var(--line);
+}
+
+.admissions-panel__links li:last-child {
+  border-bottom: 0;
+}
+
+.admissions-panel__links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 3.5rem;
+  padding: 1rem 1.35rem;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--primary);
+  transition: background var(--transition), color var(--transition);
+}
+
+.admissions-panel__links a:hover {
+  background: var(--secondary);
+  color: var(--accent);
+}
+
+.news-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+}
+
+.news-side {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.home-events {
+  background: var(--secondary);
+}
+
+.events-split {
+  display: grid;
+  grid-template-columns: 0.85fr 1.25fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.events-split .lede {
+  margin: 0.75rem 0 1.25rem;
+}
+
+.home-colleges {
+  background: var(--surface);
+}
+
+.home-global {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 460px;
+}
+
+.global-media {
+  overflow: hidden;
+}
+
+.global-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+}
+
+.global-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.5rem, 5vw, 4rem);
+  background: var(--primary);
+  color: #fff;
+}
+
+.global-copy .au-eyebrow {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.global-copy h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  line-height: 1.15;
+}
+
+.global-copy > p {
+  margin: 0 0 1.25rem;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 34rem;
+}
+
+.global-copy ul {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.global-copy li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.global-copy li a {
+  display: block;
+  padding: 0.7rem 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.global-copy li a:hover {
+  color: var(--accent-soft);
+}
+
+.global-link {
+  color: #fff !important;
+  align-self: flex-start;
+}
+
+.global-link:hover {
+  color: var(--accent-soft) !important;
+  border-bottom-color: var(--accent-soft) !important;
+}
+
+@media (max-width: 1024px) {
+  .study-featured,
+  .admissions-panel,
+  .news-layout,
+  .events-split,
+  .home-global {
+    grid-template-columns: 1fr;
+  }
+
+  .admissions-panel__links {
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .study-featured__media {
+    min-height: 240px;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  .study-grid,
+  .college-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-head-row,
+  .study-intro {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,76 @@
+<footer class="site-footer">
+  <div class="site-footer__inner au-container">
+    <div class="site-footer__brand">
+      <a routerLink="/" class="site-footer__brand-link" [attr.aria-label]="'header.homeAria' | translate">
+        <img
+          class="site-footer__logo"
+          src="/assets/brand/hu-logo.png"
+          [attr.alt]="'footer.logoAlt' | translate"
+          width="72"
+          height="72"
+        />
+        <p class="site-footer__wordmark">
+          <span>{{ data.brandName }}</span>
+          @if (locale.lang() === 'ar') {
+            <span>HURGHADA UNIVERSITY</span>
+          }
+        </p>
+      </a>
+      <address class="site-footer__address">
+        @for (line of data.addressLines; track $index) {
+          {{ line }}@if (!$last) {
+            <br />
+          }
+        }
+      </address>
+      <a class="site-footer__contact-link" routerLink="/contact">{{ 'footer.contactUs' | translate }}</a>
+    </div>
+
+    <div class="site-footer__columns">
+      @for (col of columns; track col.titleKey) {
+        <nav class="site-footer__col" [attr.aria-label]="col.titleKey | translate">
+          <h3>{{ col.titleKey | translate }}</h3>
+          <ul>
+            @for (link of col.links; track link.labelKey) {
+              <li>
+                @if (isExternal(link.path)) {
+                  <a [href]="link.path" target="_blank" rel="noopener noreferrer">{{ link.labelKey | translate }}</a>
+                } @else {
+                  <a [routerLink]="link.path">{{ link.labelKey | translate }}</a>
+                }
+              </li>
+            }
+          </ul>
+        </nav>
+      }
+    </div>
+  </div>
+
+  <div class="site-footer__base">
+    <div class="site-footer__base-inner au-container">
+      <nav class="site-footer__legal" [attr.aria-label]="'common.legalNav' | translate">
+        <ul>
+          @for (link of legalLinks; track link.labelKey) {
+            <li>
+              <a [routerLink]="link.path">{{ link.labelKey | translate }}</a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <ul class="site-footer__social">
+        @for (item of social; track item.labelKey) {
+          <li>
+            <a [href]="item.href" [attr.aria-label]="item.labelKey | translate" target="_blank" rel="noopener noreferrer">{{
+              item.short
+            }}</a>
+          </li>
+        }
+      </ul>
+
+      <p class="site-footer__copy">
+        &copy; {{ currentYear }} {{ data.brandName }}. {{ 'footer.rights' | translate }}
+      </p>
+    </div>
+  </div>
+</footer>

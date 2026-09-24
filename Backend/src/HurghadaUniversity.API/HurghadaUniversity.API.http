@@ -1,0 +1,6 @@
+@HurghadaUniversity.API_HostAddress = http://localhost:5142
+
+GET {{HurghadaUniversity.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

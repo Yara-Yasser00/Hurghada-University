@@ -1,0 +1,79 @@
+<app-page-header
+  eyebrow="ASSESSMENT CENTER"
+  [title]="instructor() ? 'Grade entry' : 'Grades & performance'"
+  [subtitle]="instructor() ? 'Enter and publish student assessments securely.' : 'Detailed results for your current academic semester.'"
+>
+  @if (instructor()) {
+    <button class="secondary-button" type="button" (click)="saveGrades()">
+      <svg lucideCheck [size]="17"></svg>
+      {{ saved() ? 'Saved' : 'Save changes' }}
+    </button>
+    <button class="primary-button" type="button" (click)="publishGrades()">
+      {{ published() ? 'Published' : 'Publish grades' }}
+    </button>
+  } @else {
+    <button class="secondary-button" type="button">
+      <svg lucideDownload [size]="17"></svg> Transcript
+    </button>
+  }
+</app-page-header>
+
+@if (!instructor()) {
+  <div class="grade-summary">
+    <div><span>Semester GPA</span><b>3.91</b><small>Spring 2026</small></div>
+    <div><span>Cumulative GPA</span><b>3.82</b><small>Very Good with Honors</small></div>
+    <div><span>Completed hours</span><b>74</b><small>of 132 total</small></div>
+    <div><span>Class rank</span><b>18<sup>th</sup></b><small>of 238 students</small></div>
+  </div>
+}
+
+<app-panel
+  [title]="instructor() ? ((courses()[0]?.code || 'Course') + ' · ' + (courses()[0]?.name || '')) : 'Course results'"
+  [subtitle]="instructor() ? (rows().length + ' students · Spring 2026') : 'Spring semester 2026'"
+>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>{{ instructor() ? 'Student' : 'Course' }}</th>
+          <th>Midterm /30</th>
+          <th>Coursework /20</th>
+          <th>Final /50</th>
+          <th>Total</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (instructor()) {
+          @for (row of rows(); track row.studentId; let i = $index) {
+            <tr>
+              <td>
+                <strong>{{ row.name }}</strong>
+                <small>{{ row.studentId }}</small>
+              </td>
+              <td><input class="grade-input" type="number" [ngModel]="mid(i)" (ngModelChange)="setScore(i, 'mid', $event)" /></td>
+              <td><input class="grade-input" type="number" [ngModel]="work(i)" (ngModelChange)="setScore(i, 'work', $event)" /></td>
+              <td><input class="grade-input" type="number" [ngModel]="final(i)" (ngModelChange)="setScore(i, 'final', $event)" /></td>
+              <td><b>{{ total(i) }}</b></td>
+              <td><span class="grade-letter">{{ row.letter || (total(i) > 88 ? 'A' : 'B+') }}</span></td>
+            </tr>
+          }
+        } @else {
+          @for (c of courses(); track c.code; let i = $index) {
+            <tr>
+              <td>
+                <strong>{{ c.name }}</strong>
+                <small>{{ c.code }}</small>
+              </td>
+              <td>{{ mid(i) }}</td>
+              <td>{{ work(i) }}</td>
+              <td>{{ final(i) }}</td>
+              <td><b>{{ total(i) }}</b></td>
+              <td><span class="grade-letter">{{ total(i) > 88 ? 'A' : 'B+' }}</span></td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</app-panel>

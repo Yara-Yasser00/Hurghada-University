@@ -1,0 +1,198 @@
+@if (type() === 'registration') {
+  <app-page-header
+    eyebrow="ACADEMIC OPERATIONS"
+    title="Semester registration"
+    subtitle="Control course registration windows across faculties."
+  />
+  <div class="registration-hero">
+    <div>
+      <span>SPRING 2026 REGISTRATION</span>
+      <h3>Registration is {{ enabled() ? 'open' : 'closed' }}</h3>
+      <p>Students can currently add or drop courses until March 21, 2026.</p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" [checked]="enabled()" (change)="toggleEnabled()" />
+      <span></span>
+    </label>
+  </div>
+  <app-panel title="Faculty registration status">
+    <div class="faculty-grid">
+      @for (f of faculties(); track f.name) {
+        <div>
+          <span class="faculty-icon"><svg lucideBookOpen [size]="17"></svg></span>
+          <section>
+            <strong>{{ f.name }}</strong>
+            <small>{{ f.students }} eligible students</small>
+          </section>
+          <app-status>{{ enabled() ? 'Open' : 'Closed' }}</app-status>
+        </div>
+      }
+    </div>
+  </app-panel>
+} @else if (type() === 'exams') {
+  <app-page-header
+    eyebrow="SPRING 2026"
+    title="Examination schedule"
+    subtitle="Manage exam dates, venues and seating allocations."
+  >
+    <button class="primary-button" type="button" (click)="openAddExam()">
+      <svg lucidePlus [size]="17"></svg> Schedule exam
+    </button>
+  </app-page-header>
+
+  <app-panel title="Upcoming examinations" [subtitle]="exams().length + ' scheduled'">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Date & time</th>
+            <th>Venue</th>
+            <th>Seats</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (x of exams(); track x.id; let i = $index) {
+            <tr>
+              <td>
+                <strong>{{ x.courseName }}</strong>
+                <small>{{ x.courseCode }}</small>
+              </td>
+              <td>{{ x.date }} · {{ x.time }}</td>
+              <td>{{ x.venue }}</td>
+              <td><b>{{ x.seats }}</b></td>
+              <td>
+                <app-status [kind]="x.status === 'Pending' ? 'warning' : 'success'">{{ x.status }}</app-status>
+              </td>
+              <td>
+                <button class="text-button" type="button" (click)="openEditExam(x)">Edit</button>
+                <button class="text-button" type="button" (click)="openSeating(x)">Seating →</button>
+                <button class="text-button" type="button" (click)="deleteExam(x.id)">Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </app-panel>
+} @else {
+  <app-page-header
+    eyebrow="MARCH 2026"
+    title="Payroll"
+    subtitle="Review monthly compensation and payment status."
+  >
+    <button class="primary-button" type="button" (click)="runPayroll()">
+      <svg lucidePlus [size]="17"></svg> New payroll run
+    </button>
+  </app-page-header>
+
+  <app-panel title="March payroll">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee</th>
+            <th>Base salary</th>
+            <th>Deductions</th>
+            <th>Net pay</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (x of staff(); track x.id; let i = $index) {
+            <tr>
+              <td>
+                <strong>{{ x.name }}</strong>
+                <small>{{ x.id }}</small>
+              </td>
+              <td>EGP {{ (28 + i * 3).toFixed(1) }}K</td>
+              <td>EGP {{ (2.4 + i * 0.2).toFixed(1) }}K</td>
+              <td><b>EGP {{ (25.6 + i * 2.8).toFixed(1) }}K</b></td>
+              <td>
+                <app-status [kind]="i === 0 ? 'warning' : 'success'">
+                  {{ i === 0 ? 'Pending' : 'Approved' }}
+                </app-status>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </app-panel>
+}
+
+<app-drawer
+  [open]="seatOpen()"
+  eyebrow="SEATING PLAN"
+  [title]="selectedExam()?.courseCode + ' · ' + selectedExam()?.venue"
+  [subtitle]="selectedExam()?.date + ' · ' + selectedExam()?.time"
+  (closed)="seatOpen.set(false)"
+>
+  <div class="form-grid" style="margin-bottom:16px">
+    <label>
+      <span>Student</span>
+      <select [ngModel]="seatAssign().studentId" (ngModelChange)="setSeatField('studentId', $event)">
+        <option value="">Select student</option>
+        @for (s of seatStudents(); track s.id) {
+          <option [value]="s.apiId">{{ s.name }} · {{ s.id }}</option>
+        }
+      </select>
+    </label>
+    <label>
+      <span>Seat number</span>
+      <input [ngModel]="seatAssign().seatNumber" (ngModelChange)="setSeatField('seatNumber', $event)" placeholder="001" />
+    </label>
+  </div>
+  <div class="drawer-actions" style="margin-bottom:16px">
+    <button class="primary-button" type="button" (click)="assignSeat()">Assign seat</button>
+  </div>
+  <div class="attendance-list">
+    @if (examSeats().length === 0) {
+      <p class="muted">No seats assigned yet.</p>
+    }
+    @for (s of examSeats(); track s.universityId + s.seatNumber) {
+      <label>
+        <span class="person-avatar">{{ s.seatNumber }}</span>
+        <section>
+          <strong>{{ s.studentName }}</strong>
+          <small>Seat {{ s.seatNumber }} · {{ s.universityId }}</small>
+        </section>
+        <app-status>Reserved</app-status>
+      </label>
+    }
+  </div>
+</app-drawer>
+
+<app-modal
+  [open]="modalOpen()"
+  [title]="editingExamId() ? 'Edit exam' : 'Schedule exam'"
+  [subtitle]="editingExamId() ? 'Update date, venue and capacity.' : 'Assign date, venue and capacity for an examination.'"
+  (closed)="modalOpen.set(false)"
+>
+  <div class="form-grid">
+    <label><span>Course code</span><input [ngModel]="form().courseCode" (ngModelChange)="setExamField('courseCode', $event)" [disabled]="!!editingExamId()" /></label>
+    <label><span>Course name</span><input [ngModel]="form().courseName" (ngModelChange)="setExamField('courseName', $event)" [disabled]="!!editingExamId()" /></label>
+    <label><span>Date</span><input [ngModel]="form().date" (ngModelChange)="setExamField('date', $event)" placeholder="18 Mar 2026" /></label>
+    <label><span>Time</span><input [ngModel]="form().time" (ngModelChange)="setExamField('time', $event)" /></label>
+    <label><span>Venue</span><input [ngModel]="form().venue" (ngModelChange)="setExamField('venue', $event)" /></label>
+    <label><span>Seats</span><input [ngModel]="form().seats" (ngModelChange)="setExamField('seats', $event)" /></label>
+    @if (editingExamId()) {
+      <label>
+        <span>Status</span>
+        <select [ngModel]="form().status" (ngModelChange)="setExamField('status', $event)">
+          <option value="Scheduled">Scheduled</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </label>
+    }
+  </div>
+  <div actions class="drawer-actions">
+    <button class="secondary-button" type="button" (click)="modalOpen.set(false)">Cancel</button>
+    <button class="primary-button" type="button" (click)="saveExam()">
+      {{ editingExamId() ? 'Save changes' : 'Save exam' }}
+    </button>
+  </div>
+</app-modal>

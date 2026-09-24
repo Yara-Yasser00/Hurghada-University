@@ -1,0 +1,170 @@
+<app-hero />
+
+<section class="home-actions" auReveal>
+  <div class="au-container">
+    <div class="actions-grid au-stagger">
+      @for (action of data.quickActions; track action.id) {
+        @if (isExternal(action.path)) {
+          <a
+            class="action"
+            [class]="'action action--' + action.variant"
+            [href]="action.path"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ action.titleKey | translate }}
+          </a>
+        } @else {
+          <a class="action" [class]="'action action--' + action.variant" [routerLink]="action.path">
+            {{ action.titleKey | translate }}
+          </a>
+        }
+      }
+    </div>
+  </div>
+</section>
+
+<section class="home-audience" auReveal>
+  <div class="au-container home-audience__inner">
+    <app-audience-links />
+  </div>
+</section>
+
+<section class="home-study au-section" auReveal>
+  <div class="au-container">
+    <div class="study-intro">
+      <div>
+        <p class="au-eyebrow">{{ 'home.study.eyebrow' | translate }}</p>
+        <h2>{{ 'home.study.title' | translate }}</h2>
+        <p class="lede">
+          {{ 'home.study.lede' | translate }}
+        </p>
+      </div>
+      <a class="au-text-link" routerLink="/faculties">{{ 'home.study.allFaculties' | translate }} <span class="au-arrow" aria-hidden="true">←</span></a>
+    </div>
+
+    @if (data.studyCards[0]; as featured) {
+      <div class="study-featured">
+        <a class="study-featured__media" [routerLink]="featured.path">
+          <img [src]="featured.image" [alt]="featured.title" loading="lazy" width="1000" height="700" />
+        </a>
+        <div class="study-featured__copy">
+          <span class="cat">{{ featured.category }}</span>
+          <h3>{{ featured.title }}</h3>
+          <p>{{ featured.description }}</p>
+          <a class="au-text-link" [routerLink]="featured.path">{{ 'home.study.learnMore' | translate }} <span class="au-arrow" aria-hidden="true">←</span></a>
+        </div>
+      </div>
+    }
+
+    <div class="study-grid">
+      @for (card of data.studyCards.slice(1); track card.id) {
+        <app-feature-card [card]="card" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="home-research" auReveal>
+  <div class="au-container au-section">
+    <app-research-feature />
+  </div>
+</section>
+
+<section class="home-admissions au-section" auReveal>
+  <div class="au-container admissions-panel">
+    <div class="admissions-panel__main">
+      <p class="au-eyebrow">{{ 'home.admissions.eyebrow' | translate }}</p>
+      <h2>{{ 'home.admissions.title' | translate }}</h2>
+      <p>
+        {{ 'home.admissions.body' | translate }}
+      </p>
+      <div class="admissions-actions">
+        <a class="au-btn au-btn-primary" routerLink="/students">{{ 'home.admissions.studentServices' | translate }}</a>
+        <a class="au-btn au-btn-dark" routerLink="/e-services">{{ 'home.admissions.eServices' | translate }}</a>
+      </div>
+    </div>
+    <ul class="admissions-panel__links">
+      <li><a routerLink="/students/activities">{{ 'home.admissions.activities' | translate }} <span aria-hidden="true">‹</span></a></li>
+      <li><a routerLink="/community/units">{{ 'home.admissions.pdCentre' | translate }} <span aria-hidden="true">‹</span></a></li>
+      <li><a routerLink="/students/scholarships">{{ 'home.admissions.scholarships' | translate }} <span aria-hidden="true">‹</span></a></li>
+      <li><a routerLink="/contact">{{ 'home.admissions.contact' | translate }} <span aria-hidden="true">‹</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<div auReveal>
+  <app-statistics />
+</div>
+
+<section class="home-news au-section" auReveal>
+  <div class="au-container">
+    <div class="section-head-row">
+      <div>
+        <p class="au-eyebrow">{{ 'home.news.eyebrow' | translate }}</p>
+        <h2 class="section-title">{{ 'home.news.title' | translate }}</h2>
+      </div>
+      <a class="au-text-link" routerLink="/news">{{ 'home.news.allNews' | translate }} <span class="au-arrow" aria-hidden="true">←</span></a>
+    </div>
+    <div class="news-layout">
+      @if (data.getFeaturedNews(); as featuredNews) {
+        <app-news-card [article]="featuredNews" [featured]="true" />
+      }
+      <div class="news-side">
+        @for (article of data.getSecondaryNews(); track article.id) {
+          <app-news-card [article]="article" />
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-events au-section" auReveal>
+  <div class="au-container events-split">
+    <div>
+      <p class="au-eyebrow">{{ 'home.events.eyebrow' | translate }}</p>
+      <h2 class="section-title">{{ 'home.events.title' | translate }}</h2>
+      <p class="lede">{{ 'home.events.lede' | translate }}</p>
+      <a class="au-text-link" routerLink="/agenda">{{ 'home.events.fullAgenda' | translate }} <span class="au-arrow" aria-hidden="true">←</span></a>
+    </div>
+    <app-events-list [events]="data.events" />
+  </div>
+</section>
+
+<section class="home-colleges au-section" auReveal>
+  <div class="au-container">
+    <div class="section-head-row">
+      <div>
+        <p class="au-eyebrow">{{ 'home.colleges.eyebrow' | translate }}</p>
+        <h2 class="section-title">{{ 'home.colleges.title' | translate }}</h2>
+        <p class="lede">{{ 'home.colleges.lede' | translate }}</p>
+      </div>
+      <a class="au-text-link" routerLink="/faculties">{{ 'home.colleges.view' | translate }} <span class="au-arrow" aria-hidden="true">←</span></a>
+    </div>
+    <div class="college-grid">
+      @for (faculty of data.faculties.slice(0, 6); track faculty.id) {
+        <app-college-card [college]="faculty" />
+      }
+    </div>
+  </div>
+</section>
+
+<section class="home-global" auReveal>
+  <div class="global-media">
+    <img [src]="data.globalImage" [alt]="'home.global.alt' | translate" loading="lazy" width="1400" height="900" />
+  </div>
+  <div class="global-copy">
+    <p class="au-eyebrow">{{ 'home.global.eyebrow' | translate }}</p>
+    <h2>{{ 'home.global.title' | translate }}</h2>
+    <p>
+      {{ 'home.global.body' | translate }}
+    </p>
+    <ul>
+      <li><a routerLink="/community">{{ 'home.global.units' | translate }}</a></li>
+      <li><a routerLink="/community/units">{{ 'home.global.pd' | translate }}</a></li>
+      <li><a routerLink="/about">{{ 'home.global.about' | translate }}</a></li>
+      <li><a routerLink="/contact">{{ 'home.global.contactUs' | translate }}</a></li>
+    </ul>
+    <a class="au-text-link global-link" routerLink="/about">{{ 'home.global.aboutLink' | translate }} <span class="au-arrow" aria-hidden="true">←</span></a>
+  </div>
+</section>

@@ -1,0 +1,376 @@
+{
+  "nav": {
+    "home": "Home",
+    "faculties": "University Faculties",
+    "faculties.edu": "Faculty of Education",
+    "faculties.tourism": "Faculty of Tourism & Hotels",
+    "faculties.alsun": "Faculty of Al-Alsun",
+    "faculties.fci": "Faculty of Computers & AI",
+    "faculties.sci": "Faculty of Science",
+    "faculties.all": "All faculties",
+    "academic": "Academic Affairs",
+    "academic.programs": "Undergraduate programs",
+    "academic.graduate": "Graduate studies",
+    "academic.services": "Academic services",
+    "academic.quality": "Quality & accreditation",
+    "academic.eservices": "E-services",
+    "research": "Scientific Research",
+    "research.centres": "Research centres",
+    "research.projects": "Research projects",
+    "research.libraries": "Libraries",
+    "research.awards": "Research awards",
+    "students": "Students",
+    "students.services": "Student services",
+    "students.activities": "Student activities",
+    "students.health": "Health care",
+    "students.scholarships": "Scholarships",
+    "community": "Units & Centres",
+    "community.units": "Hurghada Professional Development Centre",
+    "community.service": "Community service",
+    "community.guide": "Services guide",
+    "staff": "University Sectors",
+    "staff.faculty": "Faculty members",
+    "staff.military": "Military education",
+    "staff.services": "Services & facilities",
+    "about": "About the University",
+    "about.history": "University origins",
+    "about.facts": "Vision & mission",
+    "about.leadership": "University leadership",
+    "about.landmarks": "Campus landmarks",
+    "search": "Search",
+    "portal": "System portal",
+    "language": "Language"
+  },
+  "utility": {
+    "home": "Home",
+    "agenda": "Agenda",
+    "links": "Important links",
+    "contact": "Contact us",
+    "portal": "System portal",
+    "email": "Email"
+  },
+  "footer": {
+    "columns": {
+      "faculties": "Faculties",
+      "academic": "Academics",
+      "students": "Students",
+      "about": "About",
+      "connect": "Connect"
+    },
+    "links": {
+      "edu": "Faculty of Education",
+      "tourism": "Tourism & Hotels",
+      "alsun": "Al-Alsun",
+      "fci": "Computers & AI",
+      "sci": "Science",
+      "programs": "Undergraduate programs",
+      "graduate": "Graduate studies",
+      "quality": "Quality",
+      "eservices": "E-services",
+      "studentServices": "Student services",
+      "activities": "Activities",
+      "scholarships": "Scholarships",
+      "agenda": "Agenda",
+      "history": "University origins",
+      "leadership": "Leadership",
+      "community": "Units & centres",
+      "staff": "University sectors",
+      "home": "Home",
+      "news": "News",
+      "links": "Important links",
+      "contact": "Contact us",
+      "portal": "System portal"
+    },
+    "legal": {
+      "privacy": "Privacy",
+      "terms": "Terms"
+    },
+    "contactUs": "Contact us",
+    "rights": "All rights reserved.",
+    "officialSite": "Official website",
+    "logoAlt": "Hurghada University logo"
+  },
+  "header": {
+    "homeAria": "Hurghada University — Home",
+    "logoAlt": "Hurghada University logo",
+    "openSearch": "Open search",
+    "openMenu": "Open menu"
+  },
+  "portal": {
+    "eyebrow": "Electronic services portal",
+    "title": "System portal",
+    "lede": "Choose your entry path first — then continue to sign in.",
+    "intro": "Welcome to the Hurghada University electronic services portal. Select the appropriate path before signing in to the dashboard.",
+    "studentsTitle": "Student login",
+    "studentsDesc": "Courses · schedules · grades · fees",
+    "staffTitle": "Non-student login",
+    "staffDesc": "Faculty · administration · human resources",
+    "hint1": "After choosing, you will go to the sign-in page for that path.",
+    "hint2": "Current demo password:",
+    "hint3": "For inquiries:",
+    "contact": "Contact us"
+  },
+  "common": {
+    "search": "Search",
+    "portal": "Portal",
+    "language": "Language",
+    "relatedLinks": "Related links",
+    "sectionNotFound": "Section not found",
+    "backHome": "Back to home",
+    "readMore": "Read more →",
+    "skipToContent": "Skip to content",
+    "mainNav": "Main navigation",
+    "mobileNav": "Mobile main navigation",
+    "utilityNav": "Utility links",
+    "legalNav": "Legal links",
+    "officialSite": "Official website",
+    "faculties": "University faculties",
+    "news": "University news",
+    "about": "About the University",
+    "community": "Units & centres",
+    "staff": "University sectors",
+    "eservices": "E-services",
+    "pdCentre": "Professional development centre",
+    "agenda": "Agenda",
+    "contact": "Contact us",
+    "home": "Home",
+    "facultyPage": "Faculty page",
+    "closeSearch": "Close search",
+    "searchTitle": "Search",
+    "searchPlaceholder": "Search the site",
+    "searchHint": "Faculties, news, services…",
+    "searchSuggested": "Suggested searches",
+    "searchAria": "Hurghada University search",
+    "searchResults": "results",
+    "searchEmpty": "No results. Try another word."
+  },
+  "statistics": {
+    "aria": "University statistics",
+    "founded": "Hurghada University founded by official decree",
+    "campusAcres": "Acres of campus area",
+    "facultiesOpen": "Faculties open to students",
+    "location": "University seat in Hurghada",
+    "faculties": "University faculties",
+    "students": "Registered students",
+    "staff": "Faculty & staff",
+    "courses": "Courses & curricula"
+  },
+  "home": {
+    "hero": {
+      "brandFallback": "Hurghada University",
+      "aria": "University introduction",
+      "faculties": "University faculties",
+      "about": "About the University",
+      "news": "University news",
+      "slidesNav": "Hero slides",
+      "prev": "Previous slide",
+      "next": "Next slide",
+      "slideOf": "Slide",
+      "slides": {
+        "campus": {
+          "title": "A university on the Red Sea coast",
+          "body": "A modern academic campus in Hurghada uniting quality education, community service, and sustainable regional development."
+        },
+        "academic": {
+          "title": "Programs built to national standards",
+          "body": "Diverse faculties and evolving curricula prepare graduates for local and global careers with scientific and practical skills."
+        },
+        "life": {
+          "title": "A vibrant campus life",
+          "body": "Student activities, full support services, and an inspiring learning environment on one of Egypt’s finest shorelines."
+        },
+        "research": {
+          "title": "Research that serves society",
+          "body": "Centres and projects addressing Red Sea, tourism, environment, and technology challenges."
+        },
+        "community": {
+          "title": "Partnership with community and industry",
+          "body": "We work with institutions and sectors to deliver applied knowledge, training, and career pathways for our students and graduates."
+        }
+      }
+    },
+    "actions": {
+      "faculties": "Hurghada University faculties",
+      "scienceOpening": "Faculty of Science opening",
+      "portal": "System portal",
+      "tourism": "Faculty of Tourism & Hotels",
+      "ai": "Computers & Artificial Intelligence",
+      "news": "University news",
+      "about": "About Hurghada University"
+    },
+    "audience": {
+      "aria": "Links by audience",
+      "currentStudents": {
+        "title": "Current students",
+        "desc": "Student services, activities, care, and scholarships on campus."
+      },
+      "newStudents": {
+        "title": "New students",
+        "desc": "Explore faculties and programs and begin study at Hurghada University."
+      },
+      "faculty": {
+        "title": "Faculty members",
+        "desc": "Services, facilities, and university sectors."
+      },
+      "researchers": {
+        "title": "Researchers",
+        "desc": "Scientific research, projects, and libraries."
+      },
+      "visitors": {
+        "title": "Visitors",
+        "desc": "Campus information and ways to contact the university."
+      },
+      "partners": {
+        "title": "Community partners",
+        "desc": "Community service and environmental development in the Red Sea."
+      }
+    },
+    "study": {
+      "eyebrow": "University faculties",
+      "title": "Study at Hurghada University",
+      "lede": "Faculties of Education, Tourism, Al-Alsun, Computers, and Science — with programs linked to the Red Sea job market.",
+      "allFaculties": "All faculties",
+      "learnMore": "Learn about the faculty",
+      "more": "More",
+      "categoryFaculty": "Faculty",
+      "edu": {
+        "title": "Faculty of Education",
+        "desc": "Teacher preparation and education programs since the Hurghada branch nucleus in 1995."
+      },
+      "tourism": {
+        "title": "Faculty of Tourism & Hotels",
+        "desc": "Hospitality and tourism talent aligned with the Red Sea labour market."
+      },
+      "fci": {
+        "title": "Computers & Artificial Intelligence",
+        "desc": "Modern programs in computing, AI, and future technologies."
+      },
+      "sci": {
+        "title": "Faculty of Science",
+        "desc": "A new faculty supporting scientific disciplines and links to the job market."
+      }
+    },
+    "research": {
+      "eyebrow": "Scientific research",
+      "title": "Research serving the nation and knowledge",
+      "sub": "Centres, projects, and initiatives that strengthen applied research at Hurghada University for the Red Sea and Egypt.",
+      "viewAll": "All scientific research",
+      "r1": {
+        "area": "Red Sea",
+        "title": "Applied research serving the Red Sea environment",
+        "summary": "Research projects linking the university to tourism and environmental development in the governorate."
+      },
+      "r2": {
+        "area": "Artificial intelligence",
+        "title": "AI applications and education",
+        "summary": "Initiatives from the Faculty of Computers & AI supporting digital transformation."
+      },
+      "r3": {
+        "area": "Hospitality",
+        "title": "International hospitality management & Vatel programs",
+        "summary": "International training partnerships for the Faculty of Tourism & Hotels."
+      },
+      "r4": {
+        "area": "Education",
+        "title": "Educational research & support for people of determination",
+        "summary": "Supporting educational research and programs for psychological resilience and inclusion."
+      }
+    },
+    "admissions": {
+      "eyebrow": "Students & services",
+      "title": "Campus life on the Red Sea coast",
+      "body": "Student services, activities, care, and units and centres that support your academic and professional journey at Hurghada University.",
+      "studentServices": "Student services",
+      "eServices": "E-services",
+      "activities": "Student activities",
+      "pdCentre": "Professional development centre",
+      "scholarships": "Scholarships",
+      "contact": "Contact us"
+    },
+    "news": {
+      "eyebrow": "News",
+      "title": "Hurghada University news",
+      "allNews": "All news"
+    },
+    "events": {
+      "eyebrow": "Agenda",
+      "title": "University events",
+      "lede": "Orientation days, workshops, conferences, and student activities.",
+      "fullAgenda": "Full agenda"
+    },
+    "colleges": {
+      "eyebrow": "Faculties",
+      "title": "University faculties & institutes",
+      "lede": "A growing academic system at the heart of Hurghada.",
+      "view": "View faculties"
+    },
+    "global": {
+      "eyebrow": "University & community",
+      "title": "Serving the Red Sea community",
+      "body": "Hurghada University connects education and research with community service and environmental development through its units, centres, and local partnerships.",
+      "alt": "Hurghada University campus and university life",
+      "units": "Units & centres",
+      "pd": "Professional development centre",
+      "about": "University origins",
+      "contactUs": "Contact us",
+      "aboutLink": "About the University"
+    }
+  },
+  "pages": {
+    "events": {
+      "eyebrow": "Agenda",
+      "title": "Hurghada University agenda",
+      "lede": "Student, academic, and community conferences and events.",
+      "imageAlt": "Student events"
+    },
+    "about": {
+      "eyebrow": "Hurghada University",
+      "title": "About Hurghada University",
+      "lede": "An Egyptian public university on the Red Sea — rooted in the Hurghada Faculty of Education branch (1995) and established by Decree No. 3005 of 2024."
+    },
+    "colleges": {
+      "eyebrow": "Academic affairs",
+      "title": "University faculties & institutes",
+      "lede": "Hurghada University includes the faculties of Education, Tourism, Al-Alsun, Computers, and Science, with expansion into engineering and marine sciences."
+    },
+    "news": {
+      "eyebrow": "Media office",
+      "title": "Hurghada University news",
+      "lede": "Latest news from faculties, research, community service, and campus life."
+    },
+    "research": {
+      "eyebrow": "Scientific research",
+      "title": "Research at Hurghada University",
+      "lede": "Centres, projects, libraries, and awards that support applied research and Red Sea development."
+    },
+    "links": {
+      "eyebrow": "Links",
+      "title": "Important links",
+      "lede": "Essential portals and services for Hurghada University."
+    },
+    "admissions": {
+      "eyebrow": "Admissions & programs",
+      "title": "Start your journey at Hurghada University",
+      "lede": "A guide to undergraduate programs, graduate studies, scholarships, and academic services.",
+      "agenda": "Agenda",
+      "inquiry": "Inquire"
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Contact us",
+      "lede": "For general inquiries, media, partnerships, and visitor services.",
+      "address": "Address"
+    },
+    "study": {
+      "eyebrow": "Study",
+      "title": "Study at the University",
+      "lede": "Undergraduate and professional pathways across our faculties."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "lede": "The page you requested is unavailable.",
+      "home": "Back to home"
+    },
+    "bannerAria": "Page introduction"
+  }
+}

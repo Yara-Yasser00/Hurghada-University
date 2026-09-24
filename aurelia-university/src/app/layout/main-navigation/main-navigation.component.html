@@ -1,0 +1,24 @@
+<nav class="main-nav" [attr.aria-label]="'common.mainNav' | translate">
+  <ul class="main-nav__list">
+    @for (group of links; track group.path) {
+      <li class="main-nav__item" [class.has-dropdown]="group.children.length > 0">
+        <a
+          [routerLink]="group.path"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: group.path === '/' }"
+        >
+          {{ group.labelKey | translate }}
+        </a>
+        @if (group.children.length) {
+          <ul class="main-nav__dropdown" [attr.aria-label]="group.labelKey | translate">
+            @for (child of group.children; track child.path + child.labelKey) {
+              <li>
+                <a [routerLink]="child.path">{{ child.labelKey | translate }}</a>
+              </li>
+            }
+          </ul>
+        }
+      </li>
+    }
+  </ul>
+</nav>

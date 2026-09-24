@@ -1,0 +1,106 @@
+<div class="login-page">
+  <div class="login-visual">
+    <div class="visual-grid"></div>
+    <div class="login-brand">
+      <img class="login-logo" src="assets/brand/hu-logo.png" [attr.alt]="'brand.name' | translate" width="56" height="56" />
+      <div>
+        <strong>{{ 'brand.name' | translate }}</strong>
+        <span>{{ 'brand.sub' | translate }}</span>
+      </div>
+    </div>
+    <div class="visual-copy">
+      <span class="gold-line"></span>
+      <p>{{ 'login.visualEyebrow' | translate }}</p>
+      <h1>
+        {{ 'login.visualTitleLead' | translate }}
+        <br />
+        <em>{{ 'login.visualTitleEm' | translate }}</em>
+      </h1>
+      <p class="visual-lede">{{ 'login.visualLede' | translate }}</p>
+    </div>
+    <div class="visual-footer">
+      <span>{{ 'login.est' | translate }}</span>
+      <span>{{ 'login.location' | translate }}</span>
+    </div>
+  </div>
+
+  <div class="login-form-wrap">
+    <div class="login-mobile-brand">
+      <img src="assets/brand/hu-logo.png" alt="" width="32" height="32" />
+      <strong>{{ 'brand.name' | translate }}</strong>
+      <button
+        class="login-lang"
+        type="button"
+        (click)="i18n.toggle()"
+        [attr.aria-label]="'common.language' | translate"
+      >
+        {{ i18n.lang() === 'AR' ? 'EN' : 'عربي' }}
+      </button>
+    </div>
+    <div class="login-form">
+      @if (door(); as d) {
+        <div class="login-top-row">
+          <div class="login-links">
+            <a [href]="portalHubUrl" class="login-back">← {{ 'login.backPortal' | translate }}</a>
+            <a [href]="publicSiteUrl" class="login-back login-back--site">{{ 'login.backSite' | translate }}</a>
+          </div>
+          <button
+            class="login-lang login-lang--desktop"
+            type="button"
+            (click)="i18n.toggle()"
+            [attr.aria-label]="'common.language' | translate"
+          >
+            {{ i18n.lang() === 'AR' ? 'EN' : 'عربي' }}
+          </button>
+        </div>
+
+        <span class="eyebrow">{{ 'login.system' | translate }}</span>
+        <h2>{{ headline() }}</h2>
+        <p>{{ subtitle() }}</p>
+
+        <div class="role-grid" [class.role-grid--single]="roles().length === 1">
+          @for (role of roles(); track role.id) {
+            <button type="button" [class.selected]="selected() === role.id" (click)="selectRole(role.id)">
+              <span class="role-icon">
+                @switch (role.icon) {
+                  @case ('grad') { <svg lucideGraduationCap [size]="21"></svg> }
+                  @case ('users') { <svg lucideUsersRound [size]="21"></svg> }
+                  @case ('shield') { <svg lucideShieldCheck [size]="21"></svg> }
+                  @case ('building') { <svg lucideBuilding2 [size]="21"></svg> }
+                }
+              </span>
+              <span>
+                <strong>{{ role.label }}</strong>
+                <small>{{ role.detail }}</small>
+              </span>
+              <i></i>
+            </button>
+          }
+        </div>
+
+        <label class="field-label">{{ 'login.universityId' | translate }}</label>
+        <div class="login-field">
+          <svg lucideGraduationCap [size]="18"></svg>
+          <input [ngModel]="username()" (ngModelChange)="username.set($event)" autocomplete="username" />
+        </div>
+
+        <label class="field-label">{{ 'login.password' | translate }}</label>
+        <div class="login-field">
+          <svg lucideLockKeyhole [size]="18"></svg>
+          <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event)" autocomplete="current-password" />
+        </div>
+
+        <button class="sign-in" type="button" [disabled]="busy()" (click)="signIn()">
+          <span>{{ busy() ? ('login.signingIn' | translate) : accessLabel() }}</span>
+          <svg lucideArrowRight [size]="19"></svg>
+        </button>
+        <p class="secure-note">
+          <svg lucideLockKeyhole [size]="13"></svg>
+          {{ 'login.secureNote' | translate }} <code>hurghada</code>
+        </p>
+      } @else {
+        <p>{{ 'login.redirecting' | translate }}</p>
+      }
+    </div>
+  </div>
+</div>

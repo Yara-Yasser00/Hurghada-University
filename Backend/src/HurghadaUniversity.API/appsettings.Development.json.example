@@ -1,0 +1,30 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=YOUR_SERVER; Database=YOUR_DB; User Id=YOUR_USER; Password=YOUR_PASSWORD; Encrypt=True; TrustServerCertificate=True; MultipleActiveResultSets=True;"
+  },
+  "Jwt": {
+    "Issuer": "HurghadaUniversity",
+    "Audience": "HurghadaUniversity.Client",
+    "Key": "REPLACE_WITH_A_LONG_RANDOM_SECRET_AT_LEAST_32_CHARS",
+    "ExpiryMinutes": 480
+  },
+  "Cors": {
+    "Origins": [
+      "http://localhost:4200",
+      "http://localhost:4202",
+      "https://YOUR-SITE.vercel.app",
+      "https://YOUR-DASHBOARD.vercel.app"
+    ]
+  },
+  "Media": {
+    "RootPath": "uploads",
+    "PublicBaseUrl": "https://hur-uni.runasp.net",
+    "MaxBytes": 5242880
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}

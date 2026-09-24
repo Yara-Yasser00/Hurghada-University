@@ -1,0 +1,50 @@
+<app-page-header
+  eyebrow="SPRING 2026"
+  title="Weekly schedule"
+  subtitle="Your classes and academic activities for the current week."
+>
+  <button class="secondary-button" type="button">
+    <svg lucideDownload [size]="17"></svg> Export schedule
+  </button>
+</app-page-header>
+
+<div class="week-strip">
+  <button type="button">‹</button>
+  <div><span>MAR 15</span><strong>Sunday</strong></div>
+  <div class="active"><span>MAR 16</span><strong>Monday</strong></div>
+  <div><span>MAR 17</span><strong>Tuesday</strong></div>
+  <div><span>MAR 18</span><strong>Wednesday</strong></div>
+  <div><span>MAR 19</span><strong>Thursday</strong></div>
+  <button type="button">›</button>
+</div>
+
+<app-panel title="Class timetable" subtitle="8:00 AM – 5:00 PM">
+  <div class="schedule-scroll">
+    <div class="schedule-grid">
+      @for (day of weekSchedule; track day.day; let i = $index) {
+        <div class="schedule-day">
+          <header>
+            <span>{{ day.day.slice(0, 3).toUpperCase() }}</span>
+            <b>{{ 15 + i }}</b>
+          </header>
+          <div>
+            @for (c of day.classes; track c.code; let j = $index) {
+              <article
+                class="slot"
+                [class.s0]="(i + j) % 4 === 0"
+                [class.s1]="(i + j) % 4 === 1"
+                [class.s2]="(i + j) % 4 === 2"
+                [class.s3]="(i + j) % 4 === 3"
+                [style.marginTop.px]="j ? 40 : i % 2 ? 65 : 15"
+              >
+                <time>{{ c.time }}</time>
+                <strong>{{ c.code }}</strong>
+                <small>{{ c.room }}</small>
+              </article>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</app-panel>

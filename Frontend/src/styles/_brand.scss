@@ -1,0 +1,47 @@
+/* Official Hurghada University brand — shared with public site (navy / teal / gold) */
+:root {
+  --hu-navy: #0a4d6e;
+  --hu-navy-deep: #063247;
+  --hu-navy-soft: #126087;
+  --hu-teal: #1f9bb4;
+  --hu-teal-soft: #3eb5cb;
+  --hu-teal-mist: #d9f1f5;
+  --hu-gold: #f0b33a;
+  --hu-gold-soft: #f7c96a;
+  --hu-gold-deep: #c88a14;
+  --hu-coral: #e07a4a;
+  --hu-ink: #102536;
+  --hu-muted: #5f7384;
+  --hu-surface: #eef4f7;
+  --hu-paper: #ffffff;
+  --hu-white: #ffffff;
+  --hu-border: #cddce4;
+  --hu-sidebar: #063247;
+  --hu-sidebar-hover: rgba(31, 155, 180, 0.18);
+  --hu-sidebar-active: #f0b33a;
+
+  /* Align with public site: sharp institutional radius + Arabic-capable fonts */
+  --hu-radius: 0;
+  --hu-radius-sm: 2px;
+  --hu-radius-md: 4px;
+  --hu-radius-lg: 6px;
+  --hu-font-sans: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif;
+  --hu-font-serif: 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+  --hu-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Aliases matching aurelia token names */
+  --primary: var(--hu-navy);
+  --primary-deep: var(--hu-navy-deep);
+  --primary-soft: var(--hu-navy-soft);
+  --teal: var(--hu-teal);
+  --accent: var(--hu-gold);
+  --text: var(--hu-ink);
+  --muted: var(--hu-muted);
+  --line: var(--hu-border);
+  --surface: var(--hu-paper);
+
+  color: var(--hu-ink);
+  background: var(--hu-surface);
+  font-family: var(--hu-font-sans);
+  font-synthesis: none;
+}

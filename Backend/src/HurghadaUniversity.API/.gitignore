@@ -1,0 +1,7 @@
+wwwroot/
+uploads/
+bin/
+obj/
+*.user
+*.suo
+.vs/

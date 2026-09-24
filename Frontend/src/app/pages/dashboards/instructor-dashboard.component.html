@@ -1,0 +1,69 @@
+<app-page-header
+  eyebrow="SPRING 2026 · FACULTY"
+  title="Welcome, Dr. Salma"
+  subtitle="Your teaching overview and priority actions for this week."
+>
+  <button class="primary-button" type="button" routerLink="/instructor/absences">
+    <svg lucideCheckCircle2 [size]="17"></svg> Take attendance
+  </button>
+</app-page-header>
+
+<div class="stats-grid">
+  <app-stat-card label="Active courses" value="4" note="12 credit hours" tone="gold">
+    <svg icon lucideBookOpen></svg>
+  </app-stat-card>
+  <app-stat-card label="Total students" value="166" note="Across all sections">
+    <svg icon lucideUsersRound></svg>
+  </app-stat-card>
+  <app-stat-card label="Pending grades" value="23" note="Requires your attention" tone="alert">
+    <svg icon lucideClock3></svg>
+  </app-stat-card>
+  <app-stat-card label="Office hours" value="4 hrs" note="Next: Tuesday 1:00 PM">
+    <svg icon lucideCalendarDays></svg>
+  </app-stat-card>
+</div>
+
+<div class="dashboard-grid wide-left">
+  <app-panel title="My teaching load" subtitle="Course progress this semester">
+    <div class="teaching-list">
+      @for (c of courses(); track c.code) {
+        <div>
+          <span class="course-code">{{ c.code }}</span>
+          <section>
+            <strong>{{ c.name }}</strong>
+            <small>{{ c.students }} students · {{ c.room }}</small>
+            <app-progress [value]="c.progress" />
+          </section>
+          <b>{{ c.progress }}%</b>
+        </div>
+      }
+    </div>
+  </app-panel>
+  <app-panel title="Today's schedule" subtitle="Monday, March 16">
+    <div class="compact-events">
+      <div><time>10:30</time><span><strong>Database Systems</strong><small>Lab 3 · 38 students</small></span></div>
+      <div><time>13:00</time><span><strong>Office Hours</strong><small>Faculty building · Room 214</small></span></div>
+      <div><time>14:30</time><span><strong>Research Committee</strong><small>Dean’s meeting room</small></span></div>
+    </div>
+  </app-panel>
+</div>
+
+<app-panel title="Assessment status" subtitle="Items requiring action">
+  <div class="action-grid">
+    <div>
+      <svg lucideClock3></svg>
+      <span><strong>23 grades pending</strong><small>CS 341 · Midterm assessment</small></span>
+      <button type="button">Continue entry</button>
+    </div>
+    <div>
+      <svg lucideCalendarDays></svg>
+      <span><strong>Attendance not recorded</strong><small>CS 315 · Sunday session</small></span>
+      <button type="button">Record now</button>
+    </div>
+    <div>
+      <svg lucideCheckCircle2></svg>
+      <span><strong>Grades ready to publish</strong><small>CS 322 · Quiz 2</small></span>
+      <button type="button">Review</button>
+    </div>
+  </div>
+</app-panel>

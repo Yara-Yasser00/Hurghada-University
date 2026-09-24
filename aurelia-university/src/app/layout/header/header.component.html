@@ -1,0 +1,65 @@
+<header class="site-header">
+  <app-utility-bar (searchClick)="openSearch()" />
+
+  <div class="site-header__main">
+    <div class="site-header__inner au-container">
+      <a routerLink="/" class="site-header__brand" [attr.aria-label]="'header.homeAria' | translate">
+        <img
+          class="site-header__logo"
+          src="/assets/brand/hu-logo.png"
+          [attr.alt]="'header.logoAlt' | translate"
+          width="72"
+          height="72"
+        />
+        <span class="site-header__wordmark">
+          <span class="site-header__wordmark-line">{{ data.brandName }}</span>
+          @if (locale.lang() === 'ar') {
+            <span class="site-header__wordmark-line site-header__wordmark-line--sub">HURGHADA UNIVERSITY</span>
+          }
+        </span>
+      </a>
+
+      <div class="site-header__nav">
+        <app-main-navigation />
+      </div>
+
+      <div class="site-header__actions">
+        <button
+          type="button"
+          class="site-header__lang"
+          (click)="locale.toggle()"
+          [attr.aria-label]="'nav.language' | translate"
+        >
+          <span [class.is-active]="locale.lang() === 'ar'">عربي</span>
+          <span aria-hidden="true">|</span>
+          <span [class.is-active]="locale.lang() === 'en'">EN</span>
+        </button>
+
+        <button type="button" class="site-header__icon-btn" (click)="openSearch()" [attr.aria-label]="'header.openSearch' | translate">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          class="site-header__icon-btn site-header__hamburger"
+          (click)="toggleMenu()"
+          [attr.aria-expanded]="menuOpen()"
+          aria-controls="mobile-navigation"
+          [attr.aria-label]="'header.openMenu' | translate"
+        >
+          <span class="site-header__hamburger-lines" [class.is-open]="menuOpen()" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <app-mobile-navigation id="mobile-navigation" [open]="menuOpen()" (closed)="closeMenu()" />
+  <app-search-overlay [open]="searchOpen()" (closed)="closeSearch()" />
+</header>
