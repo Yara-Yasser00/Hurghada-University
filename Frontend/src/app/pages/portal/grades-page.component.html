@@ -28,7 +28,7 @@
 }
 
 <app-panel
-  [title]="instructor() ? ((courses()[0]?.code || '') + ' · ' + (courses()[0]?.name || '')) : 'pages.grades.courseResults'"
+  [title]="instructor() ? (courses().length ? (courses()[0].code + ' · ' + courses()[0].name) : '') : 'pages.grades.courseResults'"
   [subtitle]="instructor() ? (rows().length + ' students · Spring 2026') : 'pages.grades.springLabel'"
 >
   <div class="table-wrap">
