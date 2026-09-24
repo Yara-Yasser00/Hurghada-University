@@ -4,7 +4,7 @@
 
 | Layer | Host | Why |
 |-------|------|-----|
-| API (.NET 10) | **MonsterASP** `hur-uni.runasp.net` | Native ASP.NET + SQL Server hosting |
+| API (.NET 10) | **MonsterASP** `https://hur-uni.runasp.net` | Native ASP.NET + SQL Server hosting |
 | Public site (Angular) | **Vercel** | Static SPA + CDN |
 | Dashboard (Angular) | **Vercel** (2nd project) | Same |
 
