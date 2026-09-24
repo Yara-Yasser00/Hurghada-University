@@ -263,27 +263,72 @@
       "titleStudent": "My grades",
       "titleInstructor": "Grade entry",
       "subtitleStudent": "Published results and semester performance.",
-      "subtitleInstructor": "Enter and publish assessment marks for your sections."
+      "subtitleInstructor": "Enter and publish assessment marks for your sections.",
+      "saved": "Saved",
+      "saveChanges": "Save changes",
+      "published": "Published",
+      "publishGrades": "Publish grades",
+      "transcript": "Transcript",
+      "semesterGpa": "Semester GPA",
+      "cumulativeGpa": "Cumulative GPA",
+      "completedHours": "Completed hours",
+      "classRank": "Class rank",
+      "semesterLabel": "Spring 2026",
+      "honorNote": "Very Good with Honors",
+      "hoursOf": "of 132 total",
+      "rankOf": "of 238 students",
+      "courseResults": "Course results",
+      "springLabel": "Spring semester 2026",
+      "colStudent": "Student",
+      "colCourse": "Course",
+      "colMidterm": "Midterm /30",
+      "colCoursework": "Coursework /20",
+      "colFinal": "Final /50",
+      "colTotal": "Total",
+      "colGrade": "Grade"
     },
     "attendance": {
       "eyebrow": "SPRING 2026",
       "title": "Attendance",
       "subtitle": "Track presence and absence across your courses.",
       "checklist": "Student checklist",
-      "markedPresent": "marked present"
+      "markedPresent": "marked present",
+      "submitAttendance": "Submit attendance",
+      "sessionDate": "Session date",
+      "present": "Present",
+      "absent": "Absent",
+      "warning": "Warning",
+      "goodStanding": "Good standing",
+      "sessionsOf": "of 20 sessions",
+      "minAttendance": "Minimum required attendance: 75%"
     },
     "fees": {
       "eyebrow": "FINANCE",
       "title": "Tuition & fees",
       "subtitle": "Current semester payment status and outstanding balance.",
       "paymentStatus": "Payment status",
-      "paymentSub": "Spring 2026 installment"
+      "paymentSub": "Spring 2026 installment",
+      "tuition": "Tuition",
+      "paid": "Paid",
+      "balanceDue": "Balance due",
+      "dueDate": "Due date",
+      "currentStatus": "Current status",
+      "statusNote": "Pay remaining balance before the deadline to keep registration active.",
+      "payBalance": "Pay remaining balance"
     },
     "announcements": {
       "eyebrow": "CAMPUS NEWS",
       "title": "Announcements",
       "subtitle": "Official notices from academic affairs and administration.",
-      "visible": "Visible across student and staff portals"
+      "visible": "Visible across student and staff portals",
+      "newAnnouncement": "New announcement",
+      "editAnnouncement": "Edit announcement",
+      "composeAnnouncement": "Compose announcement",
+      "titleField": "Title",
+      "audienceField": "Audience",
+      "bodyField": "Body",
+      "saveChanges": "Save changes",
+      "publish": "Publish"
     },
     "notifications": {
       "eyebrow": "INBOX",
@@ -296,7 +341,12 @@
       "eyebrow": "IDENTITY",
       "title": "My profile",
       "subtitle": "Your university account and contact details.",
-      "contact": "Contact & academic info"
+      "contact": "Contact & academic info",
+      "universityId": "University ID",
+      "portalLabel": "Portal",
+      "emailLabel": "Email",
+      "campusLabel": "Campus",
+      "verifiedAccount": "Verified account"
     },
     "registration": {
       "eyebrow": "ACADEMIC OPERATIONS",
@@ -331,5 +381,19 @@
       "campusLabel": "Campus image",
       "newsCover": "News cover"
     }
+  },
+  "instructor_dash": {
+    "gradesPending": "grades pending",
+    "continueEntry": "Continue entry",
+    "attendanceNotRecorded": "Attendance not recorded",
+    "recordNow": "Record now",
+    "gradesReadyToPublish": "Grades ready to publish",
+    "review": "Review"
+  },
+  "hr_dash": {
+    "academicStaff": "Academic staff",
+    "administration": "Administration",
+    "technicalStaff": "Technical staff",
+    "contractors": "Contractors"
   }
 }

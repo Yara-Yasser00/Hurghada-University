@@ -182,6 +182,8 @@ main { max-width: 1500px; margin: auto; padding: 32px 36px 54px; }
 [dir='rtl'] .flip-rtl { transform: scaleX(-1); }
 .dir-chevron::before { content: '→'; margin-inline-start: 0.25rem; }
 [dir='rtl'] .dir-chevron::before { content: '←'; }
+.dir-arrow::before { content: '←'; margin-inline-end: 0.25rem; }
+[dir='rtl'] .dir-arrow::before { content: '→'; }
 .login-brand { z-index: 1; display: flex; align-items: center; gap: 13px; }
 .login-brand > div:last-child { display: flex; flex-direction: column; }
 .brand-mark.large { width: 49px; height: 49px; }
@@ -392,6 +394,10 @@ main { max-width: 1500px; margin: auto; padding: 32px 36px 54px; }
 .toast.warning { box-shadow: inset 3px 0 #b99a48, 0 10px 30px var(--hu-navy)33; }
 .toast.danger { box-shadow: inset 3px 0 #ac4c40, 0 10px 30px var(--hu-navy)33; }
 .toast.info { box-shadow: inset 3px 0 #496887, 0 10px 30px var(--hu-navy)33; }
+[dir='rtl'] .toast.success { box-shadow: inset -3px 0 #4d7e5b, 0 10px 30px var(--hu-navy)33; }
+[dir='rtl'] .toast.warning { box-shadow: inset -3px 0 #b99a48, 0 10px 30px var(--hu-navy)33; }
+[dir='rtl'] .toast.danger { box-shadow: inset -3px 0 #ac4c40, 0 10px 30px var(--hu-navy)33; }
+[dir='rtl'] .toast.info { box-shadow: inset -3px 0 #496887, 0 10px 30px var(--hu-navy)33; }
 
 .drawer-scrim, .modal-scrim { position: fixed; inset: 0; border: 0; background: #07101e99; z-index: 40; }
 .drawer-panel { position: fixed; top: 0; inset-inline-end: 0; bottom: 0; width: min(420px, 100vw); background: white; z-index: 41; display: flex; flex-direction: column; box-shadow: -12px 0 40px #07101e33; }
@@ -451,6 +457,7 @@ main { max-width: 1500px; margin: auto; padding: 32px 36px 54px; }
 .notif-list article, .announce-card { display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid #eef0f3; cursor: pointer; }
 .notif-list article:first-child, .announce-card:first-child { border-top: 0; }
 .notif-list article.unread { background: linear-gradient(90deg, #fcfaf3, transparent); }
+[dir='rtl'] .notif-list article.unread { background: linear-gradient(270deg, #fcfaf3, transparent); }
 .notif-icon { width: 34px; height: 34px; border-radius: var(--hu-radius-md); display: grid; place-items: center; background: #e8f4f7; color: var(--hu-teal); }
 .notif-list strong, .announce-card strong { display: block; font-size: 12px; color: var(--hu-ink); }
 .notif-list p, .announce-card p { margin: 4px 0; font-size: 11px; color: #7b8495; }
@@ -526,6 +533,9 @@ main.page-enter {
 
 .sidebar nav a:hover {
   transform: translateX(2px);
+}
+[dir='rtl'] .sidebar nav a:hover {
+  transform: translateX(-2px);
 }
 
 @media (prefers-reduced-motion: reduce) {

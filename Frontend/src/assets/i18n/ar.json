@@ -263,27 +263,72 @@
       "titleStudent": "درجاتي",
       "titleInstructor": "إدخال الدرجات",
       "subtitleStudent": "النتائج المنشورة وأداء الفصل.",
-      "subtitleInstructor": "أدخل وانشر درجات التقييم لشعبك."
+      "subtitleInstructor": "أدخل وانشر درجات التقييم لشعبك.",
+      "saved": "تم الحفظ",
+      "saveChanges": "حفظ التغييرات",
+      "published": "تم النشر",
+      "publishGrades": "نشر الدرجات",
+      "transcript": "كشف الدرجات",
+      "semesterGpa": "معدل الفصل",
+      "cumulativeGpa": "المعدل التراكمي",
+      "completedHours": "الساعات المنجزة",
+      "classRank": "الترتيب الأكاديمي",
+      "semesterLabel": "ربيع 2026",
+      "honorNote": "جيد جداً مع مرتبة شرف",
+      "hoursOf": "من أصل 132",
+      "rankOf": "من 238 طالباً",
+      "courseResults": "نتائج المقررات",
+      "springLabel": "فصل الربيع 2026",
+      "colStudent": "الطالب",
+      "colCourse": "المقرر",
+      "colMidterm": "منتصف الفصل /30",
+      "colCoursework": "أعمال الفصل /20",
+      "colFinal": "النهائي /50",
+      "colTotal": "المجموع",
+      "colGrade": "التقدير"
     },
     "attendance": {
       "eyebrow": "ربيع 2026",
       "title": "الحضور",
       "subtitle": "تتبع الحضور والغياب عبر مقرراتك.",
       "checklist": "قائمة الطلاب",
-      "markedPresent": "معلّم حضورًا"
+      "markedPresent": "معلّم حضورًا",
+      "submitAttendance": "تسجيل الحضور",
+      "sessionDate": "تاريخ الجلسة",
+      "present": "حاضر",
+      "absent": "غائب",
+      "warning": "تحذير",
+      "goodStanding": "وضع جيد",
+      "sessionsOf": "من 20 جلسة",
+      "minAttendance": "الحد الأدنى للحضور المطلوب: 75%"
     },
     "fees": {
       "eyebrow": "المالية",
       "title": "المصروفات",
       "subtitle": "حالة السداد للفصل الحالي والرصيد المتبقي.",
       "paymentStatus": "حالة السداد",
-      "paymentSub": "قسط ربيع 2026"
+      "paymentSub": "قسط ربيع 2026",
+      "tuition": "الرسوم الدراسية",
+      "paid": "المدفوع",
+      "balanceDue": "الرصيد المستحق",
+      "dueDate": "تاريخ الاستحقاق",
+      "currentStatus": "الحالة الحالية",
+      "statusNote": "سدّد الرصيد المتبقي قبل الموعد النهائي للحفاظ على قيد التسجيل.",
+      "payBalance": "سداد الرصيد المتبقي"
     },
     "announcements": {
       "eyebrow": "أخبار الحرم",
       "title": "الإعلانات",
       "subtitle": "إشعارات رسمية من الشؤون الأكاديمية والإدارة.",
-      "visible": "ظاهرة عبر بوابات الطلاب والموظفين"
+      "visible": "ظاهرة عبر بوابات الطلاب والموظفين",
+      "newAnnouncement": "إعلان جديد",
+      "editAnnouncement": "تعديل الإعلان",
+      "composeAnnouncement": "إنشاء إعلان",
+      "titleField": "العنوان",
+      "audienceField": "الجمهور المستهدف",
+      "bodyField": "النص",
+      "saveChanges": "حفظ التغييرات",
+      "publish": "نشر"
     },
     "notifications": {
       "eyebrow": "الوارد",
@@ -296,7 +341,12 @@
       "eyebrow": "الهوية",
       "title": "ملفي الشخصي",
       "subtitle": "حسابك الجامعي وبيانات التواصل.",
-      "contact": "التواصل والمعلومات الأكاديمية"
+      "contact": "التواصل والمعلومات الأكاديمية",
+      "universityId": "الرقم الجامعي",
+      "portalLabel": "البوابة",
+      "emailLabel": "البريد الإلكتروني",
+      "campusLabel": "الحرم الجامعي",
+      "verifiedAccount": "حساب موثّق"
     },
     "registration": {
       "eyebrow": "العمليات الأكاديمية",
@@ -331,5 +381,19 @@
       "campusLabel": "صورة الحرم",
       "newsCover": "غلاف الخبر"
     }
+  },
+  "instructor_dash": {
+    "gradesPending": "درجة معلّقة",
+    "continueEntry": "متابعة الإدخال",
+    "attendanceNotRecorded": "لم يُسجَّل الحضور",
+    "recordNow": "تسجيل الآن",
+    "gradesReadyToPublish": "درجات جاهزة للنشر",
+    "review": "مراجعة"
+  },
+  "hr_dash": {
+    "academicStaff": "الطاقم الأكاديمي",
+    "administration": "الإدارة",
+    "technicalStaff": "الطاقم التقني",
+    "contractors": "المتعاقدون"
   }
 }

@@ -6,41 +6,41 @@
   @if (instructor()) {
     <button class="secondary-button" type="button" (click)="saveGrades()">
       <svg lucideCheck [size]="17"></svg>
-      {{ saved() ? 'Saved' : 'Save changes' }}
+      {{ saved() ? ('pages.grades.saved' | translate) : ('pages.grades.saveChanges' | translate) }}
     </button>
     <button class="primary-button" type="button" (click)="publishGrades()">
-      {{ published() ? 'Published' : 'Publish grades' }}
+      {{ published() ? ('pages.grades.published' | translate) : ('pages.grades.publishGrades' | translate) }}
     </button>
   } @else {
     <button class="secondary-button" type="button">
-      <svg lucideDownload [size]="17"></svg> Transcript
+      <svg lucideDownload [size]="17"></svg> {{ 'pages.grades.transcript' | translate }}
     </button>
   }
 </app-page-header>
 
 @if (!instructor()) {
   <div class="grade-summary">
-    <div><span>Semester GPA</span><b>3.91</b><small>Spring 2026</small></div>
-    <div><span>Cumulative GPA</span><b>3.82</b><small>Very Good with Honors</small></div>
-    <div><span>Completed hours</span><b>74</b><small>of 132 total</small></div>
-    <div><span>Class rank</span><b>18<sup>th</sup></b><small>of 238 students</small></div>
+    <div><span>{{ 'pages.grades.semesterGpa' | translate }}</span><b>3.91</b><small>{{ 'pages.grades.semesterLabel' | translate }}</small></div>
+    <div><span>{{ 'pages.grades.cumulativeGpa' | translate }}</span><b>3.82</b><small>{{ 'pages.grades.honorNote' | translate }}</small></div>
+    <div><span>{{ 'pages.grades.completedHours' | translate }}</span><b>74</b><small>{{ 'pages.grades.hoursOf' | translate }}</small></div>
+    <div><span>{{ 'pages.grades.classRank' | translate }}</span><b>18<sup>th</sup></b><small>{{ 'pages.grades.rankOf' | translate }}</small></div>
   </div>
 }
 
 <app-panel
-  [title]="instructor() ? ((courses()[0]?.code || 'Course') + ' · ' + (courses()[0]?.name || '')) : 'Course results'"
-  [subtitle]="instructor() ? (rows().length + ' students · Spring 2026') : 'Spring semester 2026'"
+  [title]="instructor() ? ((courses()[0]?.code || '') + ' · ' + (courses()[0]?.name || '')) : 'pages.grades.courseResults'"
+  [subtitle]="instructor() ? (rows().length + ' students · Spring 2026') : 'pages.grades.springLabel'"
 >
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
-          <th>{{ instructor() ? 'Student' : 'Course' }}</th>
-          <th>Midterm /30</th>
-          <th>Coursework /20</th>
-          <th>Final /50</th>
-          <th>Total</th>
-          <th>Grade</th>
+          <th>{{ instructor() ? ('pages.grades.colStudent' | translate) : ('pages.grades.colCourse' | translate) }}</th>
+          <th>{{ 'pages.grades.colMidterm' | translate }}</th>
+          <th>{{ 'pages.grades.colCoursework' | translate }}</th>
+          <th>{{ 'pages.grades.colFinal' | translate }}</th>
+          <th>{{ 'pages.grades.colTotal' | translate }}</th>
+          <th>{{ 'pages.grades.colGrade' | translate }}</th>
         </tr>
       </thead>
       <tbody>

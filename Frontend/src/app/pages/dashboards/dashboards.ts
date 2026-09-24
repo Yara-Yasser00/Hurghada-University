@@ -131,10 +131,10 @@ export class HrDashboardComponent {
   private store = inject(UniversityStore);
   staff = computed(() => this.store.staff().slice(0, 4));
   mix = [
-    ['Academic staff', 59],
-    ['Administration', 24],
-    ['Technical staff', 11],
-    ['Contractors', 6],
+    ['hr_dash.academicStaff', 59],
+    ['hr_dash.administration', 24],
+    ['hr_dash.technicalStaff', 11],
+    ['hr_dash.contractors', 6],
   ] as const;
 
   initials(name: string): string {

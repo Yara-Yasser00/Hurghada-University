@@ -42,7 +42,7 @@
     <div class="mix-list">
       @for (row of mix; track row[0]) {
         <div>
-          <span><b>{{ row[0] }}</b><small>{{ row[1] }}%</small></span>
+          <span><b>{{ row[0] | translate }}</b><small>{{ row[1] }}%</small></span>
           <app-progress [value]="row[1]" />
         </div>
       }

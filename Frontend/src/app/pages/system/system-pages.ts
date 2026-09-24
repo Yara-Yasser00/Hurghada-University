@@ -66,7 +66,7 @@ export class SettingsPageComponent {
 @Component({
   selector: 'app-profile-page',
   standalone: true,
-  imports: [PageHeaderComponent, PanelComponent, StatusComponent],
+  imports: [PageHeaderComponent, PanelComponent, StatusComponent, TranslatePipe],
   template: `
     <app-page-header
       eyebrow="pages.profile.eyebrow"
@@ -78,15 +78,15 @@ export class SettingsPageComponent {
       <div>
         <h3>{{ auth.user()?.name }}</h3>
         <p>{{ auth.user()?.id }} · {{ auth.user()?.role }}</p>
-        <app-status>Verified account</app-status>
+        <app-status>{{ 'pages.profile.verifiedAccount' | translate }}</app-status>
       </div>
     </div>
     <app-panel title="pages.profile.contact">
       <dl class="detail-grid">
-        <div><dt>University ID</dt><dd>{{ auth.user()?.id }}</dd></div>
-        <div><dt>Portal</dt><dd>{{ auth.user()?.role }}</dd></div>
-        <div><dt>Email</dt><dd>{{ email }}</dd></div>
-        <div><dt>Campus</dt><dd>Hurghada · Red Sea</dd></div>
+        <div><dt>{{ 'pages.profile.universityId' | translate }}</dt><dd>{{ auth.user()?.id }}</dd></div>
+        <div><dt>{{ 'pages.profile.portalLabel' | translate }}</dt><dd>{{ auth.user()?.role }}</dd></div>
+        <div><dt>{{ 'pages.profile.emailLabel' | translate }}</dt><dd>{{ email }}</dd></div>
+        <div><dt>{{ 'pages.profile.campusLabel' | translate }}</dt><dd>Hurghada · Red Sea</dd></div>
       </dl>
     </app-panel>
   `,
@@ -152,7 +152,7 @@ export class NotificationsPageComponent {
 @Component({
   selector: 'app-announcements-page',
   standalone: true,
-  imports: [FormsModule, PageHeaderComponent, PanelComponent, LucideMegaphone, LucidePlus],
+  imports: [FormsModule, PageHeaderComponent, PanelComponent, LucideMegaphone, LucidePlus, TranslatePipe],
   template: `
     <app-page-header
       eyebrow="pages.announcements.eyebrow"
@@ -161,24 +161,24 @@ export class NotificationsPageComponent {
     >
       @if (auth.user()?.role === 'admin') {
         <button class="primary-button" type="button" (click)="startCreate()">
-          <svg lucidePlus [size]="17"></svg> New announcement
+          <svg lucidePlus [size]="17"></svg> {{ 'pages.announcements.newAnnouncement' | translate }}
         </button>
       }
     </app-page-header>
     @if (editing()) {
       <app-panel
-        [title]="editingId() ? 'Edit announcement' : 'Compose announcement'"
+        [title]="editingId() ? 'pages.announcements.editAnnouncement' : 'pages.announcements.composeAnnouncement'"
         subtitle="pages.announcements.visible"
       >
         <div class="form-grid">
-          <label><span>Title</span><input [(ngModel)]="draftTitle" /></label>
-          <label><span>Audience</span><input [(ngModel)]="draftAudience" /></label>
-          <label class="full"><span>Body</span><textarea rows="3" [(ngModel)]="draftBody"></textarea></label>
+          <label><span>{{ 'pages.announcements.titleField' | translate }}</span><input [(ngModel)]="draftTitle" /></label>
+          <label><span>{{ 'pages.announcements.audienceField' | translate }}</span><input [(ngModel)]="draftAudience" /></label>
+          <label class="full"><span>{{ 'pages.announcements.bodyField' | translate }}</span><textarea rows="3" [(ngModel)]="draftBody"></textarea></label>
         </div>
         <div class="drawer-actions" style="margin-top:16px">
-          <button class="secondary-button" type="button" (click)="cancelEdit()">Cancel</button>
+          <button class="secondary-button" type="button" (click)="cancelEdit()">{{ 'common.cancel' | translate }}</button>
           <button class="primary-button" type="button" (click)="save()">
-            {{ editingId() ? 'Save changes' : 'Publish' }}
+            {{ editingId() ? ('pages.announcements.saveChanges' | translate) : ('pages.announcements.publish' | translate) }}
           </button>
         </div>
       </app-panel>
@@ -193,8 +193,8 @@ export class NotificationsPageComponent {
             <small>{{ a.audience }} · {{ a.date }}</small>
           </div>
           @if (auth.user()?.role === 'admin') {
-            <button class="text-button" type="button" (click)="startEdit(a)">Edit</button>
-            <button class="text-button" type="button" (click)="remove(a.id)">Delete</button>
+            <button class="text-button" type="button" (click)="startEdit(a)">{{ 'common.edit' | translate }}</button>
+            <button class="text-button" type="button" (click)="remove(a.id)">{{ 'common.delete' | translate }}</button>
           }
         </article>
       }
@@ -275,7 +275,7 @@ export class AnnouncementsPageComponent {
 @Component({
   selector: 'app-fees-page',
   standalone: true,
-  imports: [PageHeaderComponent, PanelComponent, StatusComponent, LucideWallet],
+  imports: [PageHeaderComponent, PanelComponent, StatusComponent, LucideWallet, TranslatePipe],
   template: `
     <app-page-header
       eyebrow="pages.fees.eyebrow"
@@ -283,21 +283,21 @@ export class AnnouncementsPageComponent {
       subtitle="pages.fees.subtitle"
     />
     <div class="fee-summary">
-      <div><span>Tuition</span><b>{{ fee.tuition }}</b></div>
-      <div><span>Paid</span><b>{{ fee.paid }}</b></div>
-      <div><span>Balance due</span><b>{{ fee.due }}</b></div>
-      <div><span>Due date</span><b>{{ fee.dueDate }}</b></div>
+      <div><span>{{ 'pages.fees.tuition' | translate }}</span><b>{{ fee.tuition }}</b></div>
+      <div><span>{{ 'pages.fees.paid' | translate }}</span><b>{{ fee.paid }}</b></div>
+      <div><span>{{ 'pages.fees.balanceDue' | translate }}</span><b>{{ fee.due }}</b></div>
+      <div><span>{{ 'pages.fees.dueDate' | translate }}</span><b>{{ fee.dueDate }}</b></div>
     </div>
     <app-panel title="pages.fees.paymentStatus" subtitle="pages.fees.paymentSub">
       <div class="settings-row">
         <div>
-          <strong>Current status</strong>
-          <small>Pay remaining balance before the deadline to keep registration active.</small>
+          <strong>{{ 'pages.fees.currentStatus' | translate }}</strong>
+          <small>{{ 'pages.fees.statusNote' | translate }}</small>
         </div>
         <app-status [kind]="fee.status === 'Partial' ? 'warning' : 'success'">{{ fee.status }}</app-status>
       </div>
       <button class="primary-button" type="button" (click)="pay()">
-        <svg lucideWallet [size]="17"></svg> Pay remaining balance
+        <svg lucideWallet [size]="17"></svg> {{ 'pages.fees.payBalance' | translate }}
       </button>
     </app-panel>
   `,

@@ -5,7 +5,7 @@
 >
   @if (instructor()) {
     <button class="primary-button" type="button" (click)="submitAttendance()">
-      <svg lucideCheck [size]="17"></svg> Submit attendance
+      <svg lucideCheck [size]="17"></svg> {{ 'pages.attendance.submitAttendance' | translate }}
     </button>
   }
 </app-page-header>
@@ -13,7 +13,7 @@
 @if (instructor()) {
   <div class="filterbar">
     <label class="date-field">
-      <span>Session date</span>
+      <span>{{ 'pages.attendance.sessionDate' | translate }}</span>
       <input type="date" [ngModel]="sessionDate()" (ngModelChange)="sessionDate.set($event)" />
     </label>
   </div>
@@ -28,7 +28,7 @@
             <small>{{ s.id }}</small>
           </section>
           <app-status [kind]="isPresent(s.id) ? 'success' : 'danger'">
-            {{ isPresent(s.id) ? 'Present' : 'Absent' }}
+            {{ isPresent(s.id) ? ('pages.attendance.present' | translate) : ('pages.attendance.absent' | translate) }}
           </app-status>
         </label>
       }
@@ -41,16 +41,16 @@
         <div>
           <span class="course-code" [class.c1]="i === 1" [class.c2]="i === 2" [class.c3]="i === 3" [class.c4]="i === 4">{{ c.code }}</span>
           <app-status [kind]="attendanceValues[i] < 80 ? 'danger' : 'success'">
-            {{ attendanceValues[i] < 80 ? 'Warning' : 'Good standing' }}
+            {{ attendanceValues[i] < 80 ? ('pages.attendance.warning' | translate) : ('pages.attendance.goodStanding' | translate) }}
           </app-status>
         </div>
         <h3>{{ c.name }}</h3>
         <div class="attendance-value">
           <b>{{ attendanceValues[i] }}%</b>
-          <span>{{ (attendanceValues[i] / 5) | number:'1.0-0' }} of 20 sessions</span>
+          <span>{{ (attendanceValues[i] / 5) | number:'1.0-0' }} {{ 'pages.attendance.sessionsOf' | translate }}</span>
         </div>
         <app-progress [value]="attendanceValues[i]" [warning]="attendanceValues[i] < 80" />
-        <small>Minimum required attendance: 75%</small>
+        <small>{{ 'pages.attendance.minAttendance' | translate }}</small>
       </article>
     }
   </div>
