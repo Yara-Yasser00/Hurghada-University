@@ -18,6 +18,7 @@
 **/appsettings.*.local.json
 **/secrets.json
 **/ftp-credentials*
+**/ftp-upload.ps1
 **/deploy-secrets*
 
 # Published hosting output
