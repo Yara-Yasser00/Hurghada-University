@@ -1,31 +1,31 @@
 <app-page-header
-  eyebrow="SPRING 2026 · WEEK 8"
-  title="Good morning, Nour"
-  subtitle="Here’s what’s happening with your academic journey today."
+  eyebrow="pages.student.eyebrow"
+  title="pages.student.title"
+  subtitle="pages.student.subtitle"
 >
   <button class="primary-button" type="button" routerLink="/student/courses">
-    <svg lucideBookOpen [size]="17"></svg> Register courses
+    <svg lucideBookOpen [size]="17"></svg> {{ 'pages.student.registerCourses' | translate }}
   </button>
 </app-page-header>
 
 <div class="stats-grid">
-  <app-stat-card label="Cumulative GPA" value="3.82" note="Top 8% of your cohort" tone="gold">
+  <app-stat-card label="pages.student.gpa" value="3.82" note="pages.student.gpaNote" tone="gold">
     <svg icon lucideTrendingUp></svg>
   </app-stat-card>
-  <app-stat-card label="Credit hours" value="16 / 18" note="5 courses this semester">
+  <app-stat-card label="pages.student.credits" value="16 / 18" note="pages.student.creditsNote">
     <svg icon lucideBookOpen></svg>
   </app-stat-card>
-  <app-stat-card label="Attendance" value="94%" note="Above required threshold">
+  <app-stat-card label="pages.student.attendance" value="94%" note="pages.student.attendanceNote">
     <svg icon lucideCheckCircle2></svg>
   </app-stat-card>
-  <app-stat-card label="Next class" value="10:30" note="Database Systems · Lab 3">
+  <app-stat-card label="pages.student.nextClass" value="10:30" note="pages.student.nextClassNote">
     <svg icon lucideClock3></svg>
   </app-stat-card>
 </div>
 
 <div class="dashboard-grid">
-  <app-panel title="Academic performance" subtitle="Cumulative GPA across semesters" [hasActions]="true">
-    <span actions class="metric-up">+0.21 this year</span>
+  <app-panel title="pages.student.performance" subtitle="pages.student.performanceSub" [hasActions]="true">
+    <span actions class="metric-up">{{ 'pages.student.performanceDelta' | translate }}</span>
     <div class="chart-wrap">
       <svg viewBox="0 0 360 180" width="100%" height="100%" preserveAspectRatio="none">
         <polyline
@@ -50,7 +50,7 @@
       </svg>
     </div>
   </app-panel>
-  <app-panel title="Upcoming" subtitle="Your next academic events">
+  <app-panel title="pages.student.upcoming" subtitle="pages.student.upcomingSub">
     <div class="timeline">
       <div>
         <time><b>18</b><span>MAR</span></time><i></i>
@@ -68,8 +68,11 @@
   </app-panel>
 </div>
 
-<app-panel title="Current courses" subtitle="Spring semester 2026" [hasActions]="true">
-  <button actions class="text-button" type="button" routerLink="/student/courses">View all courses →</button>
+<app-panel title="pages.student.currentCourses" subtitle="pages.student.currentCoursesSub" [hasActions]="true">
+  <button actions class="text-button" type="button" routerLink="/student/courses">
+    {{ 'pages.student.viewAllCourses' | translate }}
+    <span class="dir-chevron" aria-hidden="true"></span>
+  </button>
   <div class="course-list">
     @for (c of courses(); track c.code; let i = $index) {
       <div class="course-row">
@@ -79,10 +82,10 @@
           <small>{{ c.instructor }} · {{ c.room }}</small>
         </div>
         <div class="course-progress">
-          <span>{{ c.progress }}% complete</span>
+          <span>{{ c.progress }}{{ 'pages.student.pctComplete' | translate }}</span>
           <app-progress [value]="c.progress" />
         </div>
-        <app-status>{{ c.credits }} credits</app-status>
+        <app-status>{{ c.credits }} {{ 'common.credits' | translate }}</app-status>
       </div>
     }
   </div>

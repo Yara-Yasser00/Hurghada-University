@@ -15,6 +15,7 @@ import {
 } from '@lucide/angular';
 import { UniversityStore } from '../../core/university-store.service';
 import { gpaTrend, gradeDistribution } from '../../data/mock-data';
+import { TranslatePipe } from '../../core/translate.pipe';
 import {
   PageHeaderComponent,
   PanelComponent,
@@ -33,6 +34,7 @@ import {
     PanelComponent,
     ProgressComponent,
     StatusComponent,
+    TranslatePipe,
     LucideBookOpen,
     LucideTrendingUp,
     LucideCheckCircle2,
@@ -62,6 +64,7 @@ export class StudentDashboardComponent {
     StatCardComponent,
     PanelComponent,
     ProgressComponent,
+    TranslatePipe,
     LucideBookOpen,
     LucideUsersRound,
     LucideClock3,
@@ -83,6 +86,7 @@ export class InstructorDashboardComponent {
     PageHeaderComponent,
     StatCardComponent,
     PanelComponent,
+    TranslatePipe,
     LucideGraduationCap,
     LucideUsersRound,
     LucideBookOpen,
@@ -115,6 +119,7 @@ export class AdminDashboardComponent implements OnInit {
     PanelComponent,
     ProgressComponent,
     StatusComponent,
+    TranslatePipe,
     LucideUsersRound,
     LucideGraduationCap,
     LucideUserPlus,

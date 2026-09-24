@@ -1,19 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideArrowUpRight, LucideMoreHorizontal } from '@lucide/angular';
+import { TranslatePipe } from '../core/translate.pipe';
 
 @Component({
   selector: 'app-page-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   template: `
     <div class="page-header">
       <div>
         @if (eyebrow) {
-          <span class="eyebrow">{{ eyebrow }}</span>
+          <span class="eyebrow">{{ eyebrow | translate }}</span>
         }
-        <h2>{{ title }}</h2>
-        <p>{{ subtitle }}</p>
+        <h2>{{ title | translate }}</h2>
+        <p>{{ subtitle | translate }}</p>
       </div>
       <ng-content />
     </div>
@@ -28,16 +29,16 @@ export class PageHeaderComponent {
 @Component({
   selector: 'app-stat-card',
   standalone: true,
-  imports: [CommonModule, LucideArrowUpRight],
+  imports: [CommonModule, LucideArrowUpRight, TranslatePipe],
   template: `
     <div class="stat-card" [class.gold]="tone === 'gold'" [class.alert]="tone === 'alert'">
       <div class="stat-icon"><ng-content select="[icon]" /></div>
       <div class="stat-copy">
-        <span>{{ label }}</span>
+        <span>{{ label | translate }}</span>
         <strong>{{ value }}</strong>
-        <small>{{ note }}</small>
+        <small>{{ note | translate }}</small>
       </div>
-      <svg lucideArrowUpRight class="stat-arrow" [size]="17"></svg>
+      <svg lucideArrowUpRight class="stat-arrow flip-rtl" [size]="17"></svg>
     </div>
   `,
 })
@@ -51,19 +52,19 @@ export class StatCardComponent {
 @Component({
   selector: 'app-panel',
   standalone: true,
-  imports: [CommonModule, LucideMoreHorizontal],
+  imports: [CommonModule, LucideMoreHorizontal, TranslatePipe],
   template: `
     <section class="panel" [class]="className ? 'panel ' + className : 'panel'">
       <div class="panel-head">
         <div>
-          <h3>{{ title }}</h3>
+          <h3>{{ title | translate }}</h3>
           @if (subtitle) {
-            <p>{{ subtitle }}</p>
+            <p>{{ subtitle | translate }}</p>
           }
         </div>
         <ng-content select="[actions]" />
         @if (!hasActions) {
-          <button class="more" type="button" aria-label="More">
+          <button class="more" type="button" [attr.aria-label]="'common.more' | translate">
             <svg lucideMoreHorizontal [size]="19"></svg>
           </button>
         }

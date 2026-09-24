@@ -1,37 +1,37 @@
 <app-page-header
-  eyebrow="SPRING 2026 · FACULTY"
-  title="Welcome, Dr. Salma"
-  subtitle="Your teaching overview and priority actions for this week."
+  eyebrow="pages.instructor.eyebrow"
+  title="pages.instructor.title"
+  subtitle="pages.instructor.subtitle"
 >
   <button class="primary-button" type="button" routerLink="/instructor/absences">
-    <svg lucideCheckCircle2 [size]="17"></svg> Take attendance
+    <svg lucideCheckCircle2 [size]="17"></svg> {{ 'nav.attendance' | translate }}
   </button>
 </app-page-header>
 
 <div class="stats-grid">
-  <app-stat-card label="Active courses" value="4" note="12 credit hours" tone="gold">
+  <app-stat-card label="pages.instructor.activeCourses" value="4" note="pages.instructor.activeNote" tone="gold">
     <svg icon lucideBookOpen></svg>
   </app-stat-card>
-  <app-stat-card label="Total students" value="166" note="Across all sections">
+  <app-stat-card label="pages.instructor.totalStudents" value="166" note="pages.instructor.studentsNote">
     <svg icon lucideUsersRound></svg>
   </app-stat-card>
-  <app-stat-card label="Pending grades" value="23" note="Requires your attention" tone="alert">
+  <app-stat-card label="pages.instructor.pendingGrades" value="23" note="pages.instructor.pendingNote" tone="alert">
     <svg icon lucideClock3></svg>
   </app-stat-card>
-  <app-stat-card label="Office hours" value="4 hrs" note="Next: Tuesday 1:00 PM">
+  <app-stat-card label="pages.instructor.officeHours" value="4 hrs" note="pages.instructor.officeNote">
     <svg icon lucideCalendarDays></svg>
   </app-stat-card>
 </div>
 
 <div class="dashboard-grid wide-left">
-  <app-panel title="My teaching load" subtitle="Course progress this semester">
+  <app-panel title="pages.instructor.teachingLoad" subtitle="pages.instructor.teachingSub">
     <div class="teaching-list">
       @for (c of courses(); track c.code) {
         <div>
           <span class="course-code">{{ c.code }}</span>
           <section>
             <strong>{{ c.name }}</strong>
-            <small>{{ c.students }} students · {{ c.room }}</small>
+            <small>{{ c.students }} {{ 'common.students' | translate }} · {{ c.room }}</small>
             <app-progress [value]="c.progress" />
           </section>
           <b>{{ c.progress }}%</b>
@@ -39,7 +39,7 @@
       }
     </div>
   </app-panel>
-  <app-panel title="Today's schedule" subtitle="Monday, March 16">
+  <app-panel title="pages.instructor.todaySchedule" subtitle="pages.instructor.todaySub">
     <div class="compact-events">
       <div><time>10:30</time><span><strong>Database Systems</strong><small>Lab 3 · 38 students</small></span></div>
       <div><time>13:00</time><span><strong>Office Hours</strong><small>Faculty building · Room 214</small></span></div>
@@ -48,7 +48,7 @@
   </app-panel>
 </div>
 
-<app-panel title="Assessment status" subtitle="Items requiring action">
+<app-panel title="pages.instructor.assessment" subtitle="pages.instructor.assessmentSub">
   <div class="action-grid">
     <div>
       <svg lucideClock3></svg>

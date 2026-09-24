@@ -1,3 +1,23 @@
+.login-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.dir-arrow::before {
+  content: '←';
+}
+
+:host-context([dir='rtl']) .dir-arrow::before,
+:host-context(html[dir='rtl']) .dir-arrow::before {
+  content: '→';
+}
+
+:host-context([dir='rtl']) .flip-rtl,
+:host-context(html[dir='rtl']) .flip-rtl {
+  transform: scaleX(-1);
+}
+
 .login-top-row {
   display: flex;
   align-items: flex-start;

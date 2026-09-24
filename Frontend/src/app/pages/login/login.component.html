@@ -41,7 +41,10 @@
       @if (door(); as d) {
         <div class="login-top-row">
           <div class="login-links">
-            <a [href]="portalHubUrl" class="login-back">← {{ 'login.backPortal' | translate }}</a>
+            <a [href]="portalHubUrl" class="login-back">
+              <span class="dir-arrow" aria-hidden="true"></span>
+              {{ 'login.backPortal' | translate }}
+            </a>
             <a [href]="publicSiteUrl" class="login-back login-back--site">{{ 'login.backSite' | translate }}</a>
           </div>
           <button
@@ -92,7 +95,7 @@
 
         <button class="sign-in" type="button" [disabled]="busy()" (click)="signIn()">
           <span>{{ busy() ? ('login.signingIn' | translate) : accessLabel() }}</span>
-          <svg lucideArrowRight [size]="19"></svg>
+          <svg lucideArrowRight class="flip-rtl" [size]="19"></svg>
         </button>
         <p class="secure-note">
           <svg lucideLockKeyhole [size]="13"></svg>

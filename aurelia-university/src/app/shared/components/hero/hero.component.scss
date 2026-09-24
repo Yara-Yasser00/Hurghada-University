@@ -60,6 +60,24 @@
     );
 }
 
+:host-context([dir='rtl']) .hero__wash,
+:host-context(html[dir='rtl']) .hero__wash {
+  background:
+    linear-gradient(
+      255deg,
+      rgba(6, 50, 71, 0.88) 0%,
+      rgba(6, 50, 71, 0.72) 38%,
+      rgba(10, 77, 110, 0.42) 62%,
+      rgba(31, 155, 180, 0.28) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 50, 71, 0.35) 0%,
+      transparent 42%,
+      rgba(6, 50, 71, 0.78) 100%
+    );
+}
+
 .hero__grain {
   position: absolute;
   inset: 0;

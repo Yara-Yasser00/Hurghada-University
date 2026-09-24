@@ -1,8 +1,8 @@
 @if (type() === 'registration') {
   <app-page-header
-    eyebrow="ACADEMIC OPERATIONS"
-    title="Semester registration"
-    subtitle="Control course registration windows across faculties."
+    eyebrow="pages.registration.eyebrow"
+    title="pages.registration.title"
+    subtitle="pages.registration.subtitle"
   />
   <div class="registration-hero">
     <div>
@@ -15,7 +15,7 @@
       <span></span>
     </label>
   </div>
-  <app-panel title="Faculty registration status">
+  <app-panel title="pages.registration.facultyStatus">
     <div class="faculty-grid">
       @for (f of faculties(); track f.name) {
         <div>
@@ -31,16 +31,16 @@
   </app-panel>
 } @else if (type() === 'exams') {
   <app-page-header
-    eyebrow="SPRING 2026"
-    title="Examination schedule"
-    subtitle="Manage exam dates, venues and seating allocations."
+    eyebrow="pages.exams.eyebrow"
+    title="pages.exams.title"
+    subtitle="pages.exams.subtitle"
   >
     <button class="primary-button" type="button" (click)="openAddExam()">
       <svg lucidePlus [size]="17"></svg> Schedule exam
     </button>
   </app-page-header>
 
-  <app-panel title="Upcoming examinations" [subtitle]="exams().length + ' scheduled'">
+  <app-panel title="pages.exams.upcoming" [subtitle]="exams().length + ''">
     <div class="table-wrap">
       <table>
         <thead>
@@ -79,16 +79,16 @@
   </app-panel>
 } @else {
   <app-page-header
-    eyebrow="MARCH 2026"
-    title="Payroll"
-    subtitle="Review monthly compensation and payment status."
+    eyebrow="pages.payroll.eyebrow"
+    title="pages.payroll.title"
+    subtitle="pages.payroll.subtitle"
   >
     <button class="primary-button" type="button" (click)="runPayroll()">
       <svg lucidePlus [size]="17"></svg> New payroll run
     </button>
   </app-page-header>
 
-  <app-panel title="March payroll">
+  <app-panel title="pages.payroll.march">
     <div class="table-wrap">
       <table>
         <thead>

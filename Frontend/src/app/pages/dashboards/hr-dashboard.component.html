@@ -1,30 +1,30 @@
 <app-page-header
-  eyebrow="PEOPLE & CULTURE"
-  title="Human resources"
-  subtitle="Your people overview, staffing activity and workforce insights."
+  eyebrow="pages.hr.eyebrow"
+  title="pages.hr.title"
+  subtitle="pages.hr.subtitle"
 >
   <button class="primary-button" type="button">
-    <svg lucideUserPlus [size]="17"></svg> Add employee
+    <svg lucideUserPlus [size]="17"></svg> {{ 'pages.directory.addStaff' | translate }}
   </button>
 </app-page-header>
 
 <div class="stats-grid">
-  <app-stat-card label="Total employees" value="1,086" note="+32 this academic year" tone="gold">
+  <app-stat-card label="pages.hr.totalEmployees" value="1,086" note="pages.hr.employeesNote" tone="gold">
     <svg icon lucideUsersRound></svg>
   </app-stat-card>
-  <app-stat-card label="Academic staff" value="642" note="59% of workforce">
+  <app-stat-card label="pages.hr.academicStaff" value="642" note="pages.hr.academicNote">
     <svg icon lucideGraduationCap></svg>
   </app-stat-card>
-  <app-stat-card label="Open positions" value="18" note="7 priority vacancies">
+  <app-stat-card label="pages.hr.openPositions" value="18" note="pages.hr.positionsNote">
     <svg icon lucideUserPlus></svg>
   </app-stat-card>
-  <app-stat-card label="Monthly payroll" value="EGP 14.2M" note="Processing on March 25">
+  <app-stat-card label="pages.hr.payroll" value="EGP 14.2M" note="pages.hr.payrollNote">
     <svg icon lucideWalletCards></svg>
   </app-stat-card>
 </div>
 
 <div class="dashboard-grid wide-left">
-  <app-panel title="Recent hires" subtitle="Latest additions to the university">
+  <app-panel title="pages.hr.recentHires" subtitle="pages.hr.hiresSub">
     <div class="people-list">
       @for (p of staff(); track p.id; let i = $index) {
         <div>
@@ -33,12 +33,12 @@
             <strong>{{ p.name }}</strong>
             <small>{{ p.role }} · {{ p.department }}</small>
           </section>
-          <app-status>Onboarded</app-status>
+          <app-status>{{ 'common.open' | translate }}</app-status>
         </div>
       }
     </div>
   </app-panel>
-  <app-panel title="Workforce mix" subtitle="By employment category">
+  <app-panel title="pages.hr.workforce" subtitle="pages.hr.workforceSub">
     <div class="mix-list">
       @for (row of mix; track row[0]) {
         <div>

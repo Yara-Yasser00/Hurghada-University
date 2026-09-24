@@ -11,6 +11,8 @@ import {
 } from '@lucide/angular';
 import { ToastService } from '../../core/toast.service';
 import { UniversityStore } from '../../core/university-store.service';
+import { I18nService } from '../../core/i18n.service';
+import { TranslatePipe } from '../../core/translate.pipe';
 import { DrawerComponent, ModalComponent } from '../../shared/overlay.components';
 import { PageHeaderComponent, PanelComponent, StatusComponent } from '../../shared/ui.components';
 import { ImageUploadComponent } from '../../shared/image-upload.component';
@@ -28,13 +30,14 @@ type DirType = 'students' | 'staff' | 'faculties' | 'departments' | 'admins';
     StatusComponent,
     DrawerComponent,
     ModalComponent,
-    LucideUserPlus,
-    LucideSearch,
-    LucideFilter,
-    LucideDownload,
-    LucidePencil,
-    LucideToggleLeft,
     ImageUploadComponent,
+    TranslatePipe,
+    LucideDownload,
+    LucideFilter,
+    LucidePencil,
+    LucideSearch,
+    LucideToggleLeft,
+    LucideUserPlus,
   ],
   templateUrl: './directory-page.component.html',
 })
@@ -49,6 +52,7 @@ export class DirectoryPageComponent {
 
   private store = inject(UniversityStore);
   private toast = inject(ToastService);
+  private i18n = inject(I18nService);
 
   source = computed(() => {
     switch (this.type()) {
@@ -71,27 +75,41 @@ export class DirectoryPageComponent {
     return this.source().filter((x) => JSON.stringify(x).toLowerCase().includes(q));
   });
 
-  title = computed(
-    () =>
-      ({
-        students: 'Student records',
-        staff: 'Staff directory',
-        faculties: 'Faculties',
-        departments: 'Academic departments',
-        admins: 'College administrators',
-      })[this.type()]
-  );
+  title = computed(() => {
+    this.i18n.lang();
+    return (
+      {
+        students: 'pages.directory.titleStudents',
+        staff: 'pages.directory.titleStaff',
+        faculties: 'pages.directory.titleFaculties',
+        departments: 'pages.directory.titleDepartments',
+        admins: 'pages.directory.titleAdmins',
+      } as const
+    )[this.type()];
+  });
 
-  addLabel = computed(
-    () =>
-      ({
-        students: 'Add student',
-        staff: 'Add employee',
-        faculties: 'Add faculty',
-        departments: 'Add department',
-        admins: 'Add college admin',
-      })[this.type()]
-  );
+  addLabel = computed(() => {
+    this.i18n.lang();
+    return (
+      {
+        students: 'pages.directory.addStudent',
+        staff: 'pages.directory.addStaff',
+        faculties: 'pages.directory.addFaculty',
+        departments: 'pages.directory.addDepartment',
+        admins: 'pages.directory.addAdmin',
+      } as const
+    )[this.type()];
+  });
+
+  allTitle = computed(() => {
+    this.i18n.lang();
+    return `${this.i18n.t('pages.directory.allPrefix')} ${this.i18n.t(this.title())}`;
+  });
+
+  searchPlaceholder = computed(() => {
+    this.i18n.lang();
+    return `${this.i18n.t('pages.directory.searchPrefix')} ${this.i18n.t(this.title())}...`;
+  });
 
   initials(name: string): string {
     return name

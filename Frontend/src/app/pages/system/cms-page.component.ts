@@ -37,9 +37,9 @@ type CmsTab = 'profile' | 'news' | 'events';
   ],
   template: `
     <app-page-header
-      eyebrow="PUBLIC WEBSITE"
-      title="Website CMS"
-      subtitle="Manage bilingual public site content shown on aurelia-university (profile, news, events)."
+      eyebrow="pages.cms.eyebrow"
+      title="pages.cms.title"
+      subtitle="pages.cms.subtitle"
     />
 
     <div class="cms-tabs">
@@ -55,7 +55,7 @@ type CmsTab = 'profile' | 'news' | 'events';
     </div>
 
     @if (tab() === 'profile' && profile()) {
-      <app-panel title="Site profile" subtitle="Brand, contact, hero images, and president (AR + EN)">
+      <app-panel title="pages.cms.profile" subtitle="pages.cms.profileSub">
         <div class="form-grid">
           <label><span>Brand (AR)</span><input [(ngModel)]="profile()!.brandNameAr" /></label>
           <label><span>Brand (EN)</span><input [(ngModel)]="profile()!.brandNameEn" /></label>
@@ -97,7 +97,7 @@ type CmsTab = 'profile' | 'news' | 'events';
     }
 
     @if (tab() === 'news') {
-      <app-panel title="Website news" subtitle="Cards on the public homepage and news pages (AR + EN)">
+      <app-panel title="pages.cms.news" subtitle="pages.cms.newsSub">
         <div class="drawer-actions" style="margin-bottom:16px">
           <button class="primary-button" type="button" (click)="creatingNews.set(true); editingNewsId.set(null); resetNewsDraft()">
             <svg lucidePlus [size]="17"></svg> Add news
@@ -155,7 +155,7 @@ type CmsTab = 'profile' | 'news' | 'events';
     }
 
     @if (tab() === 'events') {
-      <app-panel title="Website events" subtitle="Agenda items on the public site (AR + EN)">
+      <app-panel title="pages.cms.events" subtitle="pages.cms.eventsSub">
         <div class="drawer-actions" style="margin-bottom:16px">
           <button class="primary-button" type="button" (click)="creatingEvent.set(true); editingEventId.set(null); resetEventDraft()">
             <svg lucidePlus [size]="17"></svg> Add event

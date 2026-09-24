@@ -17,11 +17,11 @@ import { TranslatePipe } from '../../core/translate.pipe';
   template: `
     <app-page-header
       eyebrow="ACCOUNT"
-      [title]="'settings.title' | translate"
-      [subtitle]="'settings.subtitle' | translate"
+      title="settings.title"
+      subtitle="settings.subtitle"
     />
     <div class="settings-grid">
-      <app-panel [title]="'settings.languageTitle' | translate" [subtitle]="'settings.languageSubtitle' | translate">
+      <app-panel title="settings.languageTitle" subtitle="settings.languageSubtitle">
         <div class="settings-row">
           <div>
             <strong>{{ 'settings.displayLanguage' | translate }}</strong>
@@ -32,13 +32,13 @@ import { TranslatePipe } from '../../core/translate.pipe';
           </button>
         </div>
       </app-panel>
-      <app-panel [title]="'settings.notificationsTitle' | translate" [subtitle]="'settings.notificationsSubtitle' | translate">
+      <app-panel title="settings.notificationsTitle" subtitle="settings.notificationsSubtitle">
         <label class="settings-check"><input type="checkbox" [(ngModel)]="emailAlerts" /> {{ 'settings.emailAlerts' | translate }}</label>
         <label class="settings-check"><input type="checkbox" [(ngModel)]="examAlerts" /> {{ 'settings.examAlerts' | translate }}</label>
         <label class="settings-check"><input type="checkbox" [(ngModel)]="gradeAlerts" /> {{ 'settings.gradeAlerts' | translate }}</label>
         <button class="primary-button" type="button" (click)="save()">{{ 'common.save' | translate }}</button>
       </app-panel>
-      <app-panel [title]="'settings.securityTitle' | translate" [subtitle]="'settings.securitySubtitle' | translate">
+      <app-panel title="settings.securityTitle" subtitle="settings.securitySubtitle">
         <div class="settings-row">
           <div>
             <strong>{{ 'settings.signedInAs' | translate }}</strong>
@@ -69,9 +69,9 @@ export class SettingsPageComponent {
   imports: [PageHeaderComponent, PanelComponent, StatusComponent],
   template: `
     <app-page-header
-      eyebrow="IDENTITY"
-      title="My profile"
-      subtitle="Your university account and contact details."
+      eyebrow="pages.profile.eyebrow"
+      title="pages.profile.title"
+      subtitle="pages.profile.subtitle"
     />
     <div class="profile-hero">
       <div class="avatar large">{{ initials }}</div>
@@ -81,7 +81,7 @@ export class SettingsPageComponent {
         <app-status>Verified account</app-status>
       </div>
     </div>
-    <app-panel title="Contact & academic info">
+    <app-panel title="pages.profile.contact">
       <dl class="detail-grid">
         <div><dt>University ID</dt><dd>{{ auth.user()?.id }}</dd></div>
         <div><dt>Portal</dt><dd>{{ auth.user()?.role }}</dd></div>
@@ -109,18 +109,18 @@ export class ProfilePageComponent {
 @Component({
   selector: 'app-notifications-page',
   standalone: true,
-  imports: [PageHeaderComponent, PanelComponent, LucideBell, LucideCheck],
+  imports: [PageHeaderComponent, PanelComponent, LucideBell, LucideCheck, TranslatePipe],
   template: `
     <app-page-header
-      eyebrow="INBOX"
-      title="Notifications"
-      subtitle="Alerts across academic operations and your portal."
+      eyebrow="pages.notifications.eyebrow"
+      title="pages.notifications.title"
+      subtitle="pages.notifications.subtitle"
     >
       <button class="secondary-button" type="button" (click)="notifications.markAllRead()">
-        <svg lucideCheck [size]="16"></svg> Mark all read
+        <svg lucideCheck [size]="16"></svg> {{ 'common.markAllRead' | translate }}
       </button>
     </app-page-header>
-    <app-panel title="Recent" [subtitle]="notifications.unreadCount() + ' unread'">
+    <app-panel title="pages.notifications.recent" [subtitle]="notifications.unreadCount() + ' ' + ('pages.notifications.unread' | translate)">
       <div class="notif-list">
         @for (n of notifications.items(); track n.id) {
           <article [class.unread]="!n.read" (click)="open(n.id, n.href)">
@@ -155,9 +155,9 @@ export class NotificationsPageComponent {
   imports: [FormsModule, PageHeaderComponent, PanelComponent, LucideMegaphone, LucidePlus],
   template: `
     <app-page-header
-      eyebrow="CAMPUS NEWS"
-      title="Announcements"
-      subtitle="Official notices from academic affairs and administration."
+      eyebrow="pages.announcements.eyebrow"
+      title="pages.announcements.title"
+      subtitle="pages.announcements.subtitle"
     >
       @if (auth.user()?.role === 'admin') {
         <button class="primary-button" type="button" (click)="startCreate()">
@@ -168,7 +168,7 @@ export class NotificationsPageComponent {
     @if (editing()) {
       <app-panel
         [title]="editingId() ? 'Edit announcement' : 'Compose announcement'"
-        subtitle="Visible across student and staff portals"
+        subtitle="pages.announcements.visible"
       >
         <div class="form-grid">
           <label><span>Title</span><input [(ngModel)]="draftTitle" /></label>
@@ -278,9 +278,9 @@ export class AnnouncementsPageComponent {
   imports: [PageHeaderComponent, PanelComponent, StatusComponent, LucideWallet],
   template: `
     <app-page-header
-      eyebrow="FINANCE"
-      title="Tuition & fees"
-      subtitle="Current semester payment status and outstanding balance."
+      eyebrow="pages.fees.eyebrow"
+      title="pages.fees.title"
+      subtitle="pages.fees.subtitle"
     />
     <div class="fee-summary">
       <div><span>Tuition</span><b>{{ fee.tuition }}</b></div>
@@ -288,7 +288,7 @@ export class AnnouncementsPageComponent {
       <div><span>Balance due</span><b>{{ fee.due }}</b></div>
       <div><span>Due date</span><b>{{ fee.dueDate }}</b></div>
     </div>
-    <app-panel title="Payment status" subtitle="Spring 2026 installment">
+    <app-panel title="pages.fees.paymentStatus" subtitle="pages.fees.paymentSub">
       <div class="settings-row">
         <div>
           <strong>Current status</strong>

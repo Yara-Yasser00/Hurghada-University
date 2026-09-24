@@ -144,7 +144,7 @@ export class LayoutComponent {
     effect(() => {
       this.currentLabel();
       this.i18n.lang();
-      document.title = `${this.currentLabel()} · HU Portal`;
+      document.title = `${this.currentLabel()} · ${this.i18n.t('common.portalBrand')}`;
     });
 
     this.router.events

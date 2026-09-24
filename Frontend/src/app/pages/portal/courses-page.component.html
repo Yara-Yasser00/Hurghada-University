@@ -1,24 +1,24 @@
 <app-page-header
-  eyebrow="SPRING 2026"
+  eyebrow="pages.courses.eyebrow"
   [title]="title()"
   [subtitle]="subtitle()"
 >
   @if (role() === 'student') {
-    <div class="credit-chip">Registered · {{ registeredCredits() }} / {{ creditLimit() }} hrs</div>
+    <div class="credit-chip">{{ 'pages.courses.registered' | translate }} · {{ registeredCredits() }} / {{ creditLimit() }} hrs</div>
   }
   <button class="primary-button" type="button" (click)="role() === 'admin' ? openAddCourse() : undefined">
     <svg lucidePlus [size]="17"></svg>
-    {{ role() === 'student' ? 'Browse courses' : role() === 'admin' ? 'Add course' : 'Request section' }}
+    {{ actionLabel() | translate }}
   </button>
 </app-page-header>
 
 <div class="filterbar">
   <div class="table-search">
     <svg lucideSearch [size]="17"></svg>
-    <input placeholder="Search by course name or code..." />
+    <input [placeholder]="'pages.courses.searchPlaceholder' | translate" />
   </div>
-  <button type="button"><svg lucideFilter [size]="16"></svg> Department</button>
-  <button type="button"><svg lucideSlidersHorizontal [size]="16"></svg> More filters</button>
+  <button type="button"><svg lucideFilter [size]="16"></svg> {{ 'common.department' | translate }}</button>
+  <button type="button"><svg lucideSlidersHorizontal [size]="16"></svg> {{ 'common.moreFilters' | translate }}</button>
 </div>
 
 <div class="card-course-grid">
@@ -33,42 +33,42 @@
           [class.c4]="i === 4"
         >{{ c.code }}</span>
         <app-status [kind]="c.enabled === false ? 'warning' : i === 4 ? 'warning' : 'success'">
-          {{ c.enabled === false ? 'Disabled' : i === 4 ? 'Nearly full' : 'Open' }}
+          {{ (c.enabled === false ? 'common.disabled' : i === 4 ? 'common.nearlyFull' : 'common.open') | translate }}
         </app-status>
       </div>
       <h3>{{ c.name }}</h3>
       <p>{{ c.arabic }}</p>
       <dl>
-        <div><dt>Instructor</dt><dd>{{ c.instructor }}</dd></div>
-        <div><dt>Room</dt><dd>{{ c.room }}</dd></div>
-        <div><dt>Credits</dt><dd>{{ c.credits }} hours</dd></div>
-        <div><dt>Enrollment</dt><dd>{{ c.students }} students</dd></div>
+        <div><dt>{{ 'common.instructor' | translate }}</dt><dd>{{ c.instructor }}</dd></div>
+        <div><dt>{{ 'common.room' | translate }}</dt><dd>{{ c.room }}</dd></div>
+        <div><dt>{{ 'common.credits' | translate }}</dt><dd>{{ c.credits }} {{ 'common.hours' | translate }}</dd></div>
+        <div><dt>{{ 'common.enrollment' | translate }}</dt><dd>{{ c.students }} {{ 'common.students' | translate }}</dd></div>
       </dl>
       @if (role() === 'student') {
         @if (hasConflict(c.code) && !isRegistered(c.code)) {
-          <small class="conflict-note">Conflicts with {{ hasConflict(c.code) }}</small>
+          <small class="conflict-note">{{ 'pages.courses.conflicts' | translate }} {{ hasConflict(c.code) }}</small>
         }
         <button type="button" [class.registered]="isRegistered(c.code)" (click)="toggleRegister(c.code)">
           @if (isRegistered(c.code)) {
-            <svg lucideCheck [size]="16"></svg> Registered
+            <svg lucideCheck [size]="16"></svg> {{ 'pages.courses.registered' | translate }}
           } @else {
-            Add course
+            {{ 'pages.courses.add' | translate }}
           }
         </button>
       } @else if (role() === 'instructor') {
-        <button type="button" (click)="openRoster(c)">View roster</button>
+        <button type="button" (click)="openRoster(c)">{{ 'pages.courses.viewRoster' | translate }}</button>
         <div class="course-completion">
-          <span>Semester progress <b>{{ c.progress }}%</b></span>
+          <span>{{ 'pages.courses.semesterProgress' | translate }} <b>{{ c.progress }}%</b></span>
           <app-progress [value]="c.progress" />
         </div>
       } @else {
         <div class="course-actions-row">
           <button type="button" class="ghost-course-btn" (click)="toggleEnabled(c.code)">
-            {{ c.enabled === false ? 'Enable' : 'Disable' }}
+            {{ (c.enabled === false ? 'common.enable' : 'common.disable') | translate }}
           </button>
-          <button type="button" class="ghost-course-btn" (click)="openEditCourse(c)">Edit</button>
-          <button type="button" class="ghost-course-btn" (click)="removeCourse(c.code)">Delete</button>
-          <button type="button" (click)="openRoster(c)">Details</button>
+          <button type="button" class="ghost-course-btn" (click)="openEditCourse(c)">{{ 'common.edit' | translate }}</button>
+          <button type="button" class="ghost-course-btn" (click)="removeCourse(c.code)">{{ 'common.delete' | translate }}</button>
+          <button type="button" (click)="openRoster(c)">{{ 'common.details' | translate }}</button>
         </div>
       }
     </article>
@@ -77,9 +77,9 @@
 
 <app-drawer
   [open]="rosterOpen()"
-  eyebrow="COURSE ROSTER"
+  eyebrow="pages.courses.rosterEyebrow"
   [title]="selectedCourse()?.code + ' · ' + selectedCourse()?.name"
-  [subtitle]="(selectedCourse()?.students || rosterStudents().length) + ' enrolled students'"
+  [subtitle]="(selectedCourse()?.students || rosterStudents().length) + ' ' + ('pages.courses.enrolledStudents' | translate)"
   (closed)="rosterOpen.set(false)"
 >
   <div class="attendance-list">
@@ -98,23 +98,19 @@
 
 <app-modal
   [open]="modalOpen()"
-  [title]="editingCode() ? 'Edit course' : 'Add course'"
-  [subtitle]="editingCode() ? 'Update catalog entry for ' + editingCode() : 'Create a new catalog entry for the current semester.'"
+  [title]="editingCode() ? ('common.edit' | translate) : ('pages.courses.addCourse' | translate)"
   (closed)="modalOpen.set(false)"
 >
-  <div class="form-grid">
-    <label><span>Code</span><input [ngModel]="form().code" (ngModelChange)="setCourseField('code', $event)" [disabled]="!!editingCode()" /></label>
-    <label><span>Name</span><input [ngModel]="form().name" (ngModelChange)="setCourseField('name', $event)" /></label>
-    <label><span>Arabic</span><input [ngModel]="form().arabic" (ngModelChange)="setCourseField('arabic', $event)" /></label>
-    <label><span>Instructor</span><input [ngModel]="form().instructor" (ngModelChange)="setCourseField('instructor', $event)" /></label>
-    <label><span>Room</span><input [ngModel]="form().room" (ngModelChange)="setCourseField('room', $event)" /></label>
-    <label><span>Credits</span><input [ngModel]="form().credits" (ngModelChange)="setCourseField('credits', $event)" /></label>
-    <label><span>Department</span><input [ngModel]="form().department" (ngModelChange)="setCourseField('department', $event)" /></label>
-  </div>
-  <div actions class="drawer-actions">
-    <button class="secondary-button" type="button" (click)="modalOpen.set(false)">Cancel</button>
-    <button class="primary-button" type="button" (click)="saveCourse()">
-      {{ editingCode() ? 'Save changes' : 'Save course' }}
-    </button>
-  </div>
+  <form class="form-grid" (ngSubmit)="saveCourse()">
+    <label>Code <input [ngModel]="form().code" name="code" (ngModelChange)="setCourseField('code', $event)" /></label>
+    <label>Name <input [ngModel]="form().name" name="name" (ngModelChange)="setCourseField('name', $event)" /></label>
+    <label>Arabic <input [ngModel]="form().arabic" name="arabic" (ngModelChange)="setCourseField('arabic', $event)" /></label>
+    <label>Instructor <input [ngModel]="form().instructor" name="instructor" (ngModelChange)="setCourseField('instructor', $event)" /></label>
+    <label>Room <input [ngModel]="form().room" name="room" (ngModelChange)="setCourseField('room', $event)" /></label>
+    <label>Credits <input [ngModel]="form().credits" name="credits" (ngModelChange)="setCourseField('credits', $event)" /></label>
+    <div class="form-actions">
+      <button type="button" class="ghost-course-btn" (click)="modalOpen.set(false)">{{ 'common.cancel' | translate }}</button>
+      <button type="submit" class="primary-button">{{ 'common.save' | translate }}</button>
+    </div>
+  </form>
 </app-modal>

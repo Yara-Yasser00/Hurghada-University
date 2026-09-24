@@ -1,25 +1,26 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LucideX } from '@lucide/angular';
+import { TranslatePipe } from '../core/translate.pipe';
 
 @Component({
   selector: 'app-drawer',
   standalone: true,
-  imports: [LucideX],
+  imports: [LucideX, TranslatePipe],
   template: `
     @if (open) {
-      <button class="drawer-scrim" type="button" aria-label="Close drawer" (click)="closed.emit()"></button>
+      <button class="drawer-scrim" type="button" [attr.aria-label]="'common.cancel' | translate" (click)="closed.emit()"></button>
       <aside class="drawer-panel" role="dialog" aria-modal="true">
         <header class="drawer-head">
           <div>
             @if (eyebrow) {
-              <span class="eyebrow">{{ eyebrow }}</span>
+              <span class="eyebrow">{{ eyebrow | translate }}</span>
             }
-            <h3>{{ title }}</h3>
+            <h3>{{ title | translate }}</h3>
             @if (subtitle) {
-              <p>{{ subtitle }}</p>
+              <p>{{ subtitle | translate }}</p>
             }
           </div>
-          <button class="icon-button" type="button" (click)="closed.emit()" aria-label="Close">
+          <button class="icon-button" type="button" (click)="closed.emit()" [attr.aria-label]="'common.cancel' | translate">
             <svg lucideX [size]="18"></svg>
           </button>
         </header>
@@ -40,19 +41,19 @@ export class DrawerComponent {
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [LucideX],
+  imports: [LucideX, TranslatePipe],
   template: `
     @if (open) {
-      <button class="modal-scrim" type="button" aria-label="Close modal" (click)="closed.emit()"></button>
+      <button class="modal-scrim" type="button" [attr.aria-label]="'common.cancel' | translate" (click)="closed.emit()"></button>
       <div class="modal-panel" role="dialog" aria-modal="true">
         <header class="modal-head">
           <div>
-            <h3>{{ title }}</h3>
+            <h3>{{ title | translate }}</h3>
             @if (subtitle) {
-              <p>{{ subtitle }}</p>
+              <p>{{ subtitle | translate }}</p>
             }
           </div>
-          <button class="icon-button" type="button" (click)="closed.emit()" aria-label="Close">
+          <button class="icon-button" type="button" (click)="closed.emit()" [attr.aria-label]="'common.cancel' | translate">
             <svg lucideX [size]="18"></svg>
           </button>
         </header>

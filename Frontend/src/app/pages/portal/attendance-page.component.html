@@ -1,7 +1,7 @@
 <app-page-header
-  eyebrow="SPRING 2026"
-  [title]="instructor() ? 'Record attendance' : 'Attendance overview'"
-  [subtitle]="instructor() ? 'CS 341 · Monday, March 16 · 10:30 AM' : 'Track attendance status across your enrolled courses.'"
+  eyebrow="pages.attendance.eyebrow"
+  [title]="'pages.attendance.title'"
+  [subtitle]="'pages.attendance.subtitle'"
 >
   @if (instructor()) {
     <button class="primary-button" type="button" (click)="submitAttendance()">
@@ -17,7 +17,7 @@
       <input type="date" [ngModel]="sessionDate()" (ngModelChange)="sessionDate.set($event)" />
     </label>
   </div>
-  <app-panel title="Student checklist" [subtitle]="present().length + ' of ' + students().length + ' marked present'">
+  <app-panel title="pages.attendance.checklist" [subtitle]="present().length + ' / ' + students().length">
     <div class="attendance-list">
       @for (s of students(); track s.id) {
         <label>

@@ -1,34 +1,34 @@
 <app-page-header
-  eyebrow="UNIVERSITY OPERATIONS"
-  title="Institution overview"
-  subtitle="Live academic and operational indicators across Hurghada University."
+  eyebrow="pages.admin.eyebrow"
+  title="pages.admin.title"
+  subtitle="pages.admin.subtitle"
 >
   <button class="primary-button" type="button" routerLink="/admin/students">
-    <svg lucideUserPlus [size]="17"></svg> Add student
+    <svg lucideUserPlus [size]="17"></svg> {{ 'pages.admin.addStudent' | translate }}
   </button>
 </app-page-header>
 
 <div class="stats-grid">
-  <app-stat-card [label]="'Total students'" [value]="'' + stats().totalStudents" note="From live university database" tone="gold">
+  <app-stat-card [label]="'pages.admin.totalStudents'" [value]="'' + stats().totalStudents" note="pages.admin.studentsNote" tone="gold">
     <svg icon lucideGraduationCap></svg>
   </app-stat-card>
-  <app-stat-card [label]="'Faculty members'" [value]="'' + stats().totalStaff" note="Staff directory">
+  <app-stat-card [label]="'pages.admin.faculty'" [value]="'' + stats().totalStaff" note="pages.admin.facultyNote">
     <svg icon lucideUsersRound></svg>
   </app-stat-card>
-  <app-stat-card [label]="'Active courses'" [value]="'' + stats().activeCourses" note="Enabled catalogue">
+  <app-stat-card [label]="'pages.admin.activeCourses'" [value]="'' + stats().activeCourses" note="pages.admin.coursesNote">
     <svg icon lucideBookOpen></svg>
   </app-stat-card>
   <app-stat-card
-    [label]="'Enrollment rate'"
+    [label]="'pages.admin.enrollment'"
     [value]="(stats().enrollmentRate | number:'1.0-1') + '%'"
-    note="Across faculties"
+    note="pages.admin.enrollmentNote"
   >
     <svg icon lucideBarChart3></svg>
   </app-stat-card>
 </div>
 
 <div class="dashboard-grid wide-left">
-  <app-panel title="Grade distribution" subtitle="University-wide · Fall 2025">
+  <app-panel title="pages.admin.gradeDist" subtitle="pages.admin.gradeDistSub">
     <div class="chart-wrap tall bar-chart">
       @for (d of distribution; track d.grade; let i = $index) {
         <div class="bar-col">
@@ -38,19 +38,22 @@
       }
     </div>
   </app-panel>
-  <app-panel title="Registration pulse" subtitle="Spring 2026">
+  <app-panel title="pages.admin.regPulse" subtitle="pages.admin.regPulseSub">
     <div class="ring-wrap">
-      <div class="ring"><span><b>{{ stats().enrollmentRate | number:'1.0-0' }}%</b><small>Complete</small></span></div>
+      <div class="ring"><span><b>{{ stats().enrollmentRate | number:'1.0-0' }}%</b><small>{{ 'pages.admin.complete' | translate }}</small></span></div>
       <div class="ring-legend">
-        <div><i class="gold-dot"></i><span>Faculties</span><b>{{ stats().faculties }}</b></div>
-        <div><i></i><span>Students</span><b>{{ stats().totalStudents }}</b></div>
+        <div><i class="gold-dot"></i><span>{{ 'pages.admin.faculties' | translate }}</span><b>{{ stats().faculties }}</b></div>
+        <div><i></i><span>{{ 'pages.admin.students' | translate }}</span><b>{{ stats().totalStudents }}</b></div>
       </div>
     </div>
   </app-panel>
 </div>
 
-<app-panel title="Faculties at a glance" subtitle="Enrollment and academic structure" [hasActions]="true">
-  <button actions class="text-button" type="button" routerLink="/admin/faculties">Manage faculties →</button>
+<app-panel title="pages.admin.facultiesGlance" subtitle="pages.admin.facultiesSub" [hasActions]="true">
+  <button actions class="text-button" type="button" routerLink="/admin/faculties">
+    {{ 'pages.admin.manageFaculties' | translate }}
+    <span class="dir-chevron" aria-hidden="true"></span>
+  </button>
   <div class="faculty-grid">
     @for (f of faculties(); track f.name; let i = $index) {
       <div>
@@ -61,7 +64,7 @@
         </section>
         <div>
           <b>{{ f.students }}</b>
-          <small>students</small>
+          <small>{{ 'common.students' | translate }}</small>
         </div>
       </div>
     }

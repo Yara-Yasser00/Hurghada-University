@@ -1,7 +1,7 @@
 <app-page-header
-  eyebrow="ASSESSMENT CENTER"
-  [title]="instructor() ? 'Grade entry' : 'Grades & performance'"
-  [subtitle]="instructor() ? 'Enter and publish student assessments securely.' : 'Detailed results for your current academic semester.'"
+  eyebrow="pages.grades.eyebrow"
+  [title]="instructor() ? 'pages.grades.titleInstructor' : 'pages.grades.titleStudent'"
+  [subtitle]="instructor() ? 'pages.grades.subtitleInstructor' : 'pages.grades.subtitleStudent'"
 >
   @if (instructor()) {
     <button class="secondary-button" type="button" (click)="saveGrades()">

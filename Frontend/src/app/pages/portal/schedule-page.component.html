@@ -1,10 +1,10 @@
 <app-page-header
-  eyebrow="SPRING 2026"
-  title="Weekly schedule"
-  subtitle="Your classes and academic activities for the current week."
+  eyebrow="pages.schedule.eyebrow"
+  title="pages.schedule.title"
+  subtitle="pages.schedule.subtitle"
 >
   <button class="secondary-button" type="button">
-    <svg lucideDownload [size]="17"></svg> Export schedule
+    <svg lucideDownload [size]="17"></svg> {{ 'common.export' | translate }}
   </button>
 </app-page-header>
 
@@ -18,7 +18,7 @@
   <button type="button">›</button>
 </div>
 
-<app-panel title="Class timetable" subtitle="8:00 AM – 5:00 PM">
+<app-panel title="pages.schedule.timetable" subtitle="pages.schedule.timetableSub">
   <div class="schedule-scroll">
     <div class="schedule-grid">
       @for (day of weekSchedule; track day.day; let i = $index) {

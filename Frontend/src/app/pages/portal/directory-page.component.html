@@ -1,10 +1,10 @@
 <app-page-header
-  eyebrow="UNIVERSITY DIRECTORY"
+  eyebrow="pages.directory.eyebrow"
   [title]="title()"
-  subtitle="Search, review and manage university records."
+  subtitle="pages.directory.subtitle"
 >
   <button class="primary-button" type="button" (click)="openCreate()">
-    <svg lucideUserPlus [size]="17"></svg> {{ addLabel() }}
+    <svg lucideUserPlus [size]="17"></svg> {{ addLabel() | translate }}
   </button>
 </app-page-header>
 
@@ -14,29 +14,29 @@
     <input
       [ngModel]="query()"
       (ngModelChange)="query.set($event)"
-      [placeholder]="'Search ' + type() + '...'"
+      [placeholder]="searchPlaceholder()"
     />
   </div>
-  <button type="button"><svg lucideFilter [size]="16"></svg> Filter</button>
-  <button type="button" (click)="exportCsv()"><svg lucideDownload [size]="16"></svg> Export</button>
+  <button type="button"><svg lucideFilter [size]="16"></svg> {{ 'common.filter' | translate }}</button>
+  <button type="button" (click)="exportCsv()"><svg lucideDownload [size]="16"></svg> {{ 'common.export' | translate }}</button>
 </div>
 
-<app-panel [title]="'All ' + type()" [subtitle]="filtered().length + ' records shown'">
+<app-panel [title]="allTitle()" [subtitle]="filtered().length + ' ' + ('common.recordsShown' | translate)">
   @if (filtered().length === 0) {
     <div class="empty-state">
-      <strong>No records found</strong>
-      <p>Try another search term or add a new {{ type().slice(0, -1) }}.</p>
-      <button class="primary-button" type="button" (click)="openCreate()">{{ addLabel() }}</button>
+      <strong>{{ 'common.noRecords' | translate }}</strong>
+      <p>{{ 'common.trySearch' | translate }}</p>
+      <button class="primary-button" type="button" (click)="openCreate()">{{ addLabel() | translate }}</button>
     </div>
   } @else {
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>{{ type() === 'staff' ? 'Role' : 'Affiliation' }}</th>
-            <th>{{ type() === 'students' ? 'Level' : 'Details' }}</th>
-            <th>Status</th>
+            <th>{{ 'common.name' | translate }}</th>
+            <th>{{ (type() === 'staff' ? 'common.role' : 'common.affiliation') | translate }}</th>
+            <th>{{ (type() === 'students' ? 'common.level' : 'common.detailsCol') | translate }}</th>
+            <th>{{ 'common.status' | translate }}</th>
             <th></th>
           </tr>
         </thead>
@@ -109,7 +109,7 @@
   }
   <div actions class="drawer-actions">
     <button class="secondary-button" type="button" (click)="openEdit(selected())">
-      <svg lucidePencil [size]="16"></svg> Edit
+      <svg lucidePencil [size]="16"></svg> {{ 'common.edit' | translate }}
     </button>
     @if (type() === 'faculties' || type() === 'admins') {
       <button class="secondary-button" type="button" (click)="toggleEnabled(selected())">

@@ -15,6 +15,8 @@ import {
 import { ToastService } from '../../core/toast.service';
 import { UniversityApiService } from '../../core/university-api.service';
 import { UniversityStore } from '../../core/university-store.service';
+import { I18nService } from '../../core/i18n.service';
+import { TranslatePipe } from '../../core/translate.pipe';
 import { weekSchedule } from '../../data/mock-data';
 import {
   PageHeaderComponent,
@@ -44,6 +46,7 @@ const courseSlots: Record<string, string> = {
     DrawerComponent,
     ModalComponent,
     FormsModule,
+    TranslatePipe,
     LucidePlus,
     LucideSearch,
     LucideFilter,
@@ -56,6 +59,7 @@ export class CoursesPageComponent {
   role = input('student');
   private store = inject(UniversityStore);
   private toast = inject(ToastService);
+  private i18n = inject(I18nService);
 
   courses = computed(() => this.store.courses());
   registered = computed(() => this.store.registeredCourseCodes());
@@ -68,15 +72,29 @@ export class CoursesPageComponent {
   rosterStudents = computed(() => this.store.students());
 
   title = computed(() => {
+    this.i18n.lang();
     const role = this.role();
-    return role === 'admin' ? 'Course catalog' : role === 'instructor' ? 'My courses' : 'Course registration';
+    return role === 'admin'
+      ? 'pages.courses.titleAdmin'
+      : role === 'instructor'
+        ? 'pages.courses.titleInstructor'
+        : 'pages.courses.titleStudent';
   });
 
-  subtitle = computed(() =>
-    this.role() === 'admin'
-      ? 'Manage university courses, departments and availability.'
-      : 'Review course details, sections and semester progress.'
-  );
+  subtitle = computed(() => {
+    this.i18n.lang();
+    return this.role() === 'admin' ? 'pages.courses.subtitleAdmin' : 'pages.courses.subtitleStudent';
+  });
+
+  actionLabel = computed(() => {
+    this.i18n.lang();
+    const role = this.role();
+    return role === 'student'
+      ? 'pages.courses.browse'
+      : role === 'admin'
+        ? 'pages.courses.addCourse'
+        : 'pages.courses.requestSection';
+  });
 
   registeredCredits = computed(() =>
     this.courses()
@@ -227,7 +245,7 @@ export class CoursesPageComponent {
 @Component({
   selector: 'app-schedule-page',
   standalone: true,
-  imports: [PageHeaderComponent, PanelComponent, LucideDownload],
+  imports: [PageHeaderComponent, PanelComponent, TranslatePipe, LucideDownload],
   templateUrl: './schedule-page.component.html',
 })
 export class SchedulePageComponent {
@@ -237,7 +255,7 @@ export class SchedulePageComponent {
 @Component({
   selector: 'app-grades-page',
   standalone: true,
-  imports: [FormsModule, PageHeaderComponent, PanelComponent, LucideCheck, LucideDownload],
+  imports: [FormsModule, PageHeaderComponent, PanelComponent, TranslatePipe, LucideCheck, LucideDownload],
   templateUrl: './grades-page.component.html',
 })
 export class GradesPageComponent {
@@ -371,6 +389,7 @@ export class GradesPageComponent {
     PageHeaderComponent,
     PanelComponent,
     ProgressComponent,
+    TranslatePipe,
     StatusComponent,
     LucideCheck,
   ],
